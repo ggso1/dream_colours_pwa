@@ -2,8 +2,9 @@ const CACHE_NAME = 'pwa-simple-cache-v1';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/style.css',
+    '/styles.css',
     '/manifest.json',
+    '/pwa-handler.js',
     '/icon-512x512.png' // Кешуємо іконку
 ];
 

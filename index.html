@@ -10,7 +10,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="theme-color" content="#2196F3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="manifest.json" />
 </head>
 
 <body>
@@ -18,28 +20,24 @@
         <h1>Світло народжується</h1>
         <p>Коли в душі з’являється промінь — світ стає теплішим. Жовтий — це усмішка, що народжується зсередини.</p>
         <div class="sun" onclick="showMessage('Подякуй за щось сьогодні ☀️')"></div>
-        <audio src="birds.mp3" autoplay loop></audio>
     </section>
 
-    <section class="blue">
+    <!-- <section class="blue">
         <h1>Глибина думок</h1>
         <p>Синій — це тиша, у якій чути власне серце. Це глибина, де живе твоя мрія.</p>
         <div class="waves"></div>
-        <audio src="sea.mp3" autoplay loop></audio>
     </section>
 
     <section class="green">
         <h1>Подих життя</h1>
         <p>Зелений — це дихання світу. Він вчить не поспішати, слухати серце й рости.</p>
         <div class="leaf">🍃</div>
-        <audio src="forest.mp3" autoplay loop></audio>
     </section>
 
     <section class="red">
         <h1>Пульс серця</h1>
         <p>Червоний — це полум’я, що не згасає. Це крок у невідоме, але з відкритим серцем.</p>
         <div class="heart" onclick="showMessage('Мрій голосно ❤️')"></div>
-        <audio src="heartbeat.mp3" autoplay loop></audio>
     </section>
 
     <section class="white">
@@ -52,11 +50,8 @@
         </button>
         <div id="status" class="online">Статус: Онлайн</div>
         <button onclick="chooseColor()">Створи свій колір мрії</button>
-        <audio src="silence.mp3" autoplay loop></audio>
-    </section>
+    </section> -->
 
-    <script src="script.js"></script>
-    <script src="scroll.js"></script>
     <script src="pwa-handler.js"></script>
 </body>
 

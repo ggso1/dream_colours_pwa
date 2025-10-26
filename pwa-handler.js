@@ -4,10 +4,10 @@ const statusDiv = document.getElementById('status');
 
 // 1. Обробка події beforeinstallprompt
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Запобігаємо автоматичному показу стандартного банера
-    e.preventDefault();
+    // ВАЖЛИВА ЗМІНА: Видалили e.preventDefault();
+    // Це дозволить Chrome показати свій стандартний значок/підказку.
 
-    // Зберігаємо подію, щоб викликати її пізніше при натисканні кнопки
+    // Зберігаємо подію, щоб викликати її ПІЗНІШЕ (якщо користувач натисне НАШУ кнопку)
     deferredInstallPrompt = e;
 
     // Показуємо нашу кастомну кнопку, якщо вона доступна
