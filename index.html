@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#2196F3">
+</head>
+
+<body>
+    <header>
+        <h1>Привіт, PWA! 👋</h1>
+    </header>
+    <main>
+        <p>Це простий Прогресивний Веб-Додаток.</p>
+
+        <button id="installButton" style="display: none;">
+            Встановити як додаток
+        </button>
+
+        <div id="status">Статус: Онлайн</div>
+    </main>
+
+    <script>
+        let deferredInstallPrompt = null;
+        const installButton = document.getElementById('installButton');
+
+        // 1. Обробка події beforeinstallprompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Запобігаємо автоматичному показу стандартного банера
+            e.preventDefault();
+
+            // Зберігаємо подію, щоб викликати її пізніше при натисканні кнопки
+            deferredInstallPrompt = e;
+
+            // Показуємо нашу кастомну кнопку
+            installButton.style.display = 'block';
+            console.log('Подія beforeinstallprompt збережена. Кнопка показана.');
+        });
+
+        // 2. Обробка натискання кнопки
+        installButton.addEventListener('click', async () => {
+            if (!deferredInstallPrompt) {
+                console.log('Подія встановлення не доступна.');
+                return;
+            }
+
+            // Викликаємо збережену подію, щоб показати системне діалогове вікно
+            deferredInstallPrompt.prompt();
+
+            // Чекаємо на відповідь користувача
+            const { outcome } = await deferredInstallPrompt.userChoice;
+            console.log(`Вибір користувача: ${outcome}`);
+
+            // Після того, як користувач зробив вибір, приховуємо кнопку
+            deferredInstallPrompt = null;
+            installButton.style.display = 'none';
+
+            if (outcome === 'accepted') {
+                console.log('Користувач прийняв запит на встановлення.');
+            } else {
+                console.log('Користувач відхилив запит на встановлення.');
+            }
+        });
+
+
+        // Реєстрація Service Worker (старий код)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker зареєстровано успішно:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Помилка реєстрації Service Worker:', error);
+                    });
+            });
+        }
+
+        // Оновлення статусу підключення (старий код)
+        function updateStatus() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = navigator.onLine ? 'Статус: Онлайн' : 'Статус: Офлайн (з кешу)';
+            statusDiv.className = navigator.onLine ? 'online' : 'offline';
+        }
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+        updateStatus();
+    </script>
+</body>
+
+</html>
