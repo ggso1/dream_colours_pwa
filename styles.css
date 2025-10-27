@@ -1,71 +1,37 @@
-
-section {
-    scroll-snap-align: start;
-    height: 50%;
-    width: 50%;
+/* Забезпечуємо, що кожен слайд займає 100% ширини і висоти фрейма */
+.slide {
+    flex: 0 0 100%;
+    /* Кожен слайд займає 100% ширини батьківського контейнера */
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    transition: background 1s ease;
-    position: relative;
+    padding: 2rem;
+    transition: transform 0.5s ease-out;
+    /* Плавний перехід для свайпу */
 }
 
-/* ... інші стилі ... */
-
-
-/* НОВІ СТИЛІ ДЛЯ PWA ЕЛЕМЕНТІВ */
-#installButton {
-    background-color: #4CAF50;
-    /* Зелений */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    /* Зробимо його круглим */
-    font-size: 1.1em;
-    cursor: pointer;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s, transform 0.1s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+/* Ефект для картки з текстом */
+.card-content {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    max-width: 90vw;
+    /* Максимальна ширина відносно в'юпорту */
+    animation: fadeIn 1s ease-out;
 }
 
-#installButton:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
+/* Анімація появи контенту */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
-
-#status {
-    margin-top: 5px;
-    margin-bottom: 15px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 0.9em;
-}
-
-.online {
-    background-color: #e0f7e9;
-    /* Light green */
-    color: #1e8449;
-    /* Dark green */
-}
-
-.offline {
-    background-color: #fce4e4;
-    /* Light red */
-    color: #c0392b;
-    /* Dark red */
-}
-
-/* КІНЕЦЬ НОВИХ СТИЛІВ */
-
-
-/* Приклад стилів, що вже були у вас */
-.yellow {
-    background: #eddd4e;
-}
-
-/* ... інші стилі секцій ... */
