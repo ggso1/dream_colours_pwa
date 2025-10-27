@@ -1,12 +1,29 @@
+// =======================================================
+// JAVASCRIPT ЛОГІКА СЛАЙДЕРА
+// =======================================================
+
 // Ініціалізація змінних
 const slider = document.getElementById('slider');
-const dots = [document.getElementById('dot-0'), document.getElementById('dot-1')];
+const slides = Array.from(slider.children);
+const maxPage = slides.length - 1; // Максимальний індекс сторінки (2)
+
+// Отримуємо індикатори
+const dots = Array.from(document.getElementById('pagination').children);
 const SWIPE_THRESHOLD = 80; // Мінімальна відстань для успішного свайпу (пікселів)
 
-let currentPage = 0; // Поточна сторінка: 0 або 1
-let startX = 0; // Координата X початку свайпу
-let isDragging = false; // Чи відбувається перетягування
-let currentTranslate = 0; // Поточне зміщення слайдера
+let currentPage = 0;
+let startX = 0;
+let isDragging = false;
+let currentTranslate = 0;
+let slideWidth = 0; // Ширина одного слайда
+
+/**
+ * Визначає ширину слайда, яка дорівнює ширині мобільного фрейму.
+ */
+function getSlideWidth() {
+    const mobileFrame = document.getElementById('mobile-frame');
+    slideWidth = mobileFrame.clientWidth;
+}
 
 /**
  * Оновлює вигляд індикаторів сторінок (крапок).
@@ -25,8 +42,8 @@ function updateDots() {
  * Переводить слайдер до поточної сторінки з анімацією або без.
  */
 function snapToPage(animate = true) {
-    const viewportWidth = window.innerWidth;
-    currentTranslate = -currentPage * viewportWidth;
+    getSlideWidth(); // Оновлюємо ширину перед розрахунком
+    currentTranslate = -currentPage * slideWidth;
 
     // Встановлення/зняття анімації
     slider.style.transition = animate ? 'transform 0.5s ease-out' : 'none';
@@ -40,15 +57,24 @@ function snapToPage(animate = true) {
  * Обробник початку взаємодії (миша або дотик).
  */
 function handleStart(event) {
+    // Запобігаємо стандартному перетягуванню зображень, якщо це desktop
+    if (event.type === 'mousedown') {
+        event.preventDefault();
+    }
+
     isDragging = true;
     // Визначаємо початкову позицію X
     startX = event.touches ? event.touches[0].clientX : event.clientX;
-    // Вимикаємо CSS-анімацію під час перетягування, щоб не заважала
+    // Вимикаємо CSS-анімацію під час перетягування
     slider.style.transition = 'none';
-    // Зберігаємо поточне зміщення перед початком перетягування
+
+    // Отримуємо точне поточне зміщення
     const transformMatch = slider.style.transform.match(/translateX\(([-.\d]+)px\)/);
     if (transformMatch) {
         currentTranslate = parseFloat(transformMatch[1]);
+    } else {
+        // Якщо transform ще не було встановлено (початок роботи)
+        currentTranslate = -currentPage * slideWidth;
     }
 }
 
@@ -58,29 +84,29 @@ function handleStart(event) {
 function handleMove(event) {
     if (!isDragging) return;
 
-    // Визначаємо поточну позицію
     const currentX = event.touches ? event.touches[0].clientX : event.clientX;
     const diffX = currentX - startX;
-    const viewportWidth = window.innerWidth;
+
+    getSlideWidth();
+
+    const maxTranslate = -maxPage * slideWidth;
 
     // Розрахунок нового зміщення
     let newTranslate = currentTranslate + diffX;
 
-    // Обмеження, щоб слайдер не виходив за межі
-    // Обмежуємо лівий край (Page 0: 0px)
+    // Обмеження, щоб слайдер не виходив за межі (з "гумовим" ефектом)
     if (newTranslate > 0) {
-        // Плавне "гумове" обмеження
+        // Свайп вправо на першій сторінці (еластичність 20%)
         newTranslate = diffX * 0.2;
-    }
-    // Обмежуємо правий край (Page 1: -100vw)
-    else if (newTranslate < -viewportWidth) {
-        // Плавне "гумове" обмеження
-        newTranslate = -viewportWidth + (diffX + viewportWidth) * 0.2;
+    } else if (newTranslate < maxTranslate) {
+        // Свайп вліво на останній сторінці (еластичність 20%)
+        const overflow = newTranslate - maxTranslate;
+        newTranslate = maxTranslate + overflow * 0.2;
     }
 
     slider.style.transform = `translateX(${newTranslate}px)`;
 
-    // Запобігаємо стандартному скролу, якщо це свайп
+    // Запобігаємо стандартному вертикальному скролу
     if (event.touches && Math.abs(diffX) > 10) {
         event.preventDefault();
     }
@@ -93,18 +119,20 @@ function handleEnd(event) {
     if (!isDragging) return;
     isDragging = false;
 
+    getSlideWidth();
+
     const endX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
-    const diffX = endX - startX; // Різниця: позитивне - свайп вправо, негативне - вліво
+    const diffX = endX - startX;
 
     let newPage = currentPage;
 
     // Перевірка, чи відбувся свайп за поріг
     if (Math.abs(diffX) > SWIPE_THRESHOLD) {
         if (diffX < 0) {
-            // Свайп вліво (наступна сторінка: 0 -> 1)
-            newPage = Math.min(1, currentPage + 1);
+            // Свайп вліво (наступна сторінка)
+            newPage = Math.min(maxPage, currentPage + 1);
         } else {
-            // Свайп вправо (попередня сторінка: 1 -> 0)
+            // Свайп вправо (попередня сторінка)
             newPage = Math.max(0, currentPage - 1);
         }
     }
@@ -115,13 +143,17 @@ function handleEnd(event) {
     snapToPage();
 }
 
+// Визначаємо контейнер, що приймає свайпи
+const touchElement = document.getElementById('mobile-frame');
+
 // Обробники подій для Touch (Мобільні пристрої)
-slider.addEventListener('touchstart', handleStart);
-slider.addEventListener('touchmove', handleMove);
-slider.addEventListener('touchend', handleEnd);
+touchElement.addEventListener('touchstart', handleStart);
+touchElement.addEventListener('touchmove', handleMove);
+touchElement.addEventListener('touchend', handleEnd);
 
 // Обробники подій для Mouse (Десктоп)
-slider.addEventListener('mousedown', handleStart);
+touchElement.addEventListener('mousedown', handleStart);
+// Додаємо до вікна, щоб не обривався свайп, якщо миша вийшла за межі фрейма
 window.addEventListener('mousemove', (e) => {
     if (isDragging) {
         handleMove(e);
@@ -134,7 +166,8 @@ window.addEventListener('resize', () => {
     snapToPage(false); // Без анімації
 });
 
-// Початкова ініціалізація
+// Початкова ініціалізація, коли DOM повністю завантажено
 window.onload = () => {
-    snapToPage(false); // Встановлюємо початкову позицію без анімації
+    snapToPage(false);
 };
+

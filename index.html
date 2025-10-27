@@ -3,152 +3,47 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- Обов'язково для адаптивності на мобільних пристроях -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кольори моєї мрії — Подорож відчуттів</title>
-    <!-- Завантаження Tailwind CSS для швидкого та адаптивного стилю -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* CSS СЕКЦІЯ: Стилі для мобільної адаптивності та оформлення */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700;900&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            overflow: hidden;
-            /* Запобігаємо скролу всього тіла */
-            background-color: #F8F8F8;
-            /* Блідий фон, як на скріншоті */
-        }
-
-        /* Контейнер-рамка, що імітує мобільний екран */
-        #mobile-frame {
-            width: 100%;
-            max-width: 400px;
-            /* Фіксована ширина для вигляду телефону */
-            height: 100vh;
-            max-height: 800px;
-            /* Обмеження висоти, щоб не розтягувалося занадто сильно */
-            background-color: white;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-            /* Красива тінь */
-            position: relative;
-            overflow: hidden;
-            /* Контейнер для слайдів */
-        }
-
-        /* Забезпечуємо, що кожен слайд займає 100% ширини і висоти фрейма */
-        .slide {
-            flex: 0 0 100%;
-            /* Кожен слайд займає 100% ширини батьківського контейнера */
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            transition: transform 0.5s ease-out;
-            /* Плавний перехід для свайпу */
-        }
-
-        /* Додаємо статичні фонові кольори, якщо Tailwind не спрацює */
-        #slide-1 {
-            background-color: #FACC15;
-            /* yellow-400 */
-            color: #374151;
-        }
-
-        #slide-2 {
-            background-color: #1D4ED8;
-            /* blue-700 */
-            color: #FFFFFF;
-        }
-
-        #slide-3 {
-            background-color: #059669;
-            /* green-600 */
-            color: #FFFFFF;
-        }
-
-        /* Ефект для картки з текстом */
-        .card-content {
-            padding: 1.5rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            max-width: 90vw;
-            /* Максимальна ширина відносно в'юпорту */
-            animation: fadeIn 1s ease-out;
-        }
-
-        /* Анімація появи контенту */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Забезпечення правильної ширини контейнера слайдера */
-        #slider {
-            width: 300%;
-            /* 3 слайди * 100% */
-            height: 100%;
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-    </style>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#2196F3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подорож відчуттів</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json" />
 </head>
 
 <body>
-    <!-- HTML СЕКЦІЯ: Головна структура -->
-
-    <!-- Обгортка, що центрує мобільний фрейм (імітує браузерний фон) -->
-    <div class="w-full h-screen flex justify-center items-center bg-gray-100 p-4">
-
-        <!-- Мобільний фрейм (біла картка) -->
+    <div class="app-container">
         <div id="mobile-frame">
+            <div id="app" class="app-inner-wrapper">
 
-            <!-- Головний контейнер слайдів з приховуванням горизонтального скролу -->
-            <div id="app" class="w-full h-full overflow-x-hidden">
-
-                <!-- Контейнер слайдів, який буде переміщуватися. Ширина встановлена у CSS -->
                 <div id="slider">
-
-                    <!-- Сторінка 1: Жовтий колір (Радість). Видалено Tailwind класи bg-* і text-*, використовуємо статичний CSS. -->
                     <div id="slide-1" class="slide">
-                        <div class="card-content bg-white bg-opacity-90 max-w-sm mx-auto">
-                            <h1 class="text-6xl font-black mb-3 text-yellow-600 tracking-tight">СОНЦЕ</h1>
-                            <h2 class="text-2xl font-semibold mb-4">Кольори Моєї Мрії</h2>
-                            <p class="text-lg font-medium">Жовтий колір — це світло, енергія та початок нової подорожі
+                        <div class="slide-card slide-card--sun">
+                            <h1 class="slide-title slide-title--sun">Кольори Моєї Мрії</h1>
+                            <p class="slide-text">Жовтий колір — це світло, енергія та початок нової подорожі
                                 відчуттів.</p>
                         </div>
-                        <div class="mt-8 text-xl font-bold text-yellow-800">
-                            <p>Свайпніть вліво для побажань &rarr;</p>
+                        <div class="slide-hint">
+                            <p>Свайпніть вліво &rarr;</p>
                         </div>
                     </div>
 
-                    <!-- Сторінка 2: Синій колір (Спокій) -->
                     <div id="slide-2" class="slide">
-                        <div class="card-content bg-blue-900 bg-opacity-80 max-w-sm mx-auto">
-                            <h2 class="text-5xl font-black mb-4 tracking-tight text-blue-300">ОКЕАН</h2>
-                            <p class="text-xl font-light leading-relaxed">
+                        <div class="slide-card slide-card--ocean">
+                            <h2 class="slide-title slide-title--ocean">Що Вас турбує?</h2>
+                            <p class="slide-text slide-text--ocean">
                                 Нехай синява принесе вам глибокий спокій, а ваші мрії завжди будуть такими ж безмежними,
                                 як океан.
                             </p>
                         </div>
                     </div>
 
-                    <!-- Сторінка 3: Зелений колір (Надія) -->
                     <div id="slide-3" class="slide">
-                        <div class="card-content bg-green-800 bg-opacity-80 max-w-sm mx-auto">
-                            <h2 class="text-5xl font-black mb-4 tracking-tight text-green-300">ПРИРОДА</h2>
-                            <p class="text-xl font-light leading-relaxed">
+                        <div class="slide-card slide-card--nature">
+                            <h2 class="slide-title slide-title--nature">ПРИРОДА</h2>
+                            <p class="slide-text slide-text--nature">
                                 Хай зелений колір приносить вам нескінченну надію, зростання та гармонію кожного дня.
                             </p>
                         </div>
@@ -157,177 +52,15 @@
                 </div>
             </div>
 
-            <!-- Індикатори сторінок (позиціоновані відносно #mobile-frame) -->
-            <div id="pagination" class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
-                <span id="dot-0" class="w-3 h-3 bg-white rounded-full shadow-lg transition-all duration-300"></span>
-                <span id="dot-1"
-                    class="w-3 h-3 bg-white bg-opacity-50 rounded-full shadow-lg transition-all duration-300"></span>
-                <span id="dot-2"
-                    class="w-3 h-3 bg-white bg-opacity-50 rounded-full shadow-lg transition-all duration-300"></span>
+            <div id="pagination" class="pagination-dots">
+                <span id="dot-0" class="dot active"></span>
+                <span id="dot-1" class="dot"></span>
+                <span id="dot-2" class="dot"></span>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT СЕКЦІЯ: Логіка свайпу та навігації -->
-    <script>
-        // Ініціалізація змінних
-        const slider = document.getElementById('slider');
-        // Отримуємо всі слайди та визначаємо їх кількість
-        const slides = Array.from(slider.children);
-        const maxPage = slides.length - 1; // Максимальний індекс сторінки
-
-        // Отримуємо індикатори
-        const dots = Array.from(document.getElementById('pagination').children);
-        const SWIPE_THRESHOLD = 80; // Мінімальна відстань для успішного свайпу (пікселів)
-
-        let currentPage = 0;
-        let startX = 0;
-        let isDragging = false;
-        let currentTranslate = 0;
-        let slideWidth = 0; // Ширина одного слайда (буде встановлено динамічно)
-
-        /**
-         * Визначає ширину слайда, яка дорівнює ширині батьківського контейнера (mobile-frame).
-         */
-        function getSlideWidth() {
-            // Ширина #mobile-frame - це те, що ми вважаємо "шириною екрана"
-            const mobileFrame = document.getElementById('mobile-frame');
-            slideWidth = mobileFrame.clientWidth;
-        }
-
-        /**
-         * Оновлює вигляд індикаторів сторінок (крапок).
-         */
-        function updateDots() {
-            dots.forEach((dot, index) => {
-                if (index === currentPage) {
-                    dot.classList.remove('bg-opacity-50');
-                } else {
-                    dot.classList.add('bg-opacity-50');
-                }
-            });
-        }
-
-        /**
-         * Переводить слайдер до поточної сторінки з анімацією або без.
-         */
-        function snapToPage(animate = true) {
-            getSlideWidth(); // Оновлюємо ширину
-            currentTranslate = -currentPage * slideWidth;
-
-            // Встановлення/зняття анімації
-            slider.style.transition = animate ? 'transform 0.5s ease-out' : 'none';
-
-            // Встановлення фінальної позиції
-            slider.style.transform = `translateX(${currentTranslate}px)`;
-            updateDots();
-        }
-
-        /**
-         * Обробник початку взаємодії (миша або дотик).
-         */
-        function handleStart(event) {
-            isDragging = true;
-            // Визначаємо початкову позицію X
-            startX = event.touches ? event.touches[0].clientX : event.clientX;
-            // Вимикаємо CSS-анімацію під час перетягування, щоб не заважала
-            slider.style.transition = 'none';
-            // Отримуємо точне поточне зміщення перед початком перетягування
-            const transformMatch = slider.style.transform.match(/translateX\(([-.\d]+)px\)/);
-            if (transformMatch) {
-                currentTranslate = parseFloat(transformMatch[1]);
-            }
-        }
-
-        /**
-         * Обробник переміщення (миша або дотик).
-         */
-        function handleMove(event) {
-            if (!isDragging) return;
-
-            // Визначаємо поточну позицію
-            const currentX = event.touches ? event.touches[0].clientX : event.clientX;
-            const diffX = currentX - startX;
-
-            getSlideWidth(); // Оновлюємо ширину
-            const maxTranslate = -maxPage * slideWidth; // Максимальне зміщення
-
-            // Розрахунок нового зміщення
-            let newTranslate = currentTranslate + diffX;
-
-            // Обмеження, щоб слайдер не виходив за межі (з "гумовим" ефектом)
-            if (newTranslate > 0) {
-                newTranslate = diffX * 0.15;
-            }
-            else if (newTranslate < maxTranslate) {
-                newTranslate = maxTranslate + (newTranslate - maxTranslate) * 0.15;
-            }
-
-            slider.style.transform = `translateX(${newTranslate}px)`;
-
-            // Запобігаємо стандартному скролу, якщо це свайп
-            if (event.touches && Math.abs(diffX) > 10) {
-                event.preventDefault();
-            }
-        }
-
-        /**
-         * Обробник закінчення взаємодії (миша або дотик).
-         */
-        function handleEnd(event) {
-            if (!isDragging) return;
-            isDragging = false;
-
-            const endX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
-            const diffX = endX - startX;
-
-            let newPage = currentPage;
-
-            // Перевірка, чи відбувся свайп за поріг
-            if (Math.abs(diffX) > SWIPE_THRESHOLD) {
-                if (diffX < 0) {
-                    // Свайп вліво (наступна сторінка)
-                    newPage = Math.min(maxPage, currentPage + 1);
-                } else {
-                    // Свайп вправо (попередня сторінка)
-                    newPage = Math.max(0, currentPage - 1);
-                }
-            }
-
-            currentPage = newPage;
-
-            // Зафіксувати позицію на новій/поточній сторінці з анімацією
-            snapToPage();
-        }
-
-        // Визначаємо контейнер, що приймає свайпи (це сам slider)
-        const touchElement = document.getElementById('mobile-frame');
-
-        // Обробники подій для Touch (Мобільні пристрої)
-        touchElement.addEventListener('touchstart', handleStart);
-        touchElement.addEventListener('touchmove', handleMove);
-        touchElement.addEventListener('touchend', handleEnd);
-
-        // Обробники подій для Mouse (Десктоп)
-        touchElement.addEventListener('mousedown', handleStart);
-        // Додаємо до вікна, щоб не обривався свайп, якщо миша вийшла за межі фрейма
-        window.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                handleMove(e);
-            }
-        });
-        window.addEventListener('mouseup', handleEnd);
-
-        // Обробка зміни розміру вікна для коректного позиціонування
-        window.addEventListener('resize', () => {
-            snapToPage(false); // Без анімації
-        });
-
-        // Початкова ініціалізація
-        window.onload = () => {
-            snapToPage(false); // Встановлюємо початкову позицію без анімації
-        };
-    </script>
+    <script src="app.js"></script>
 </body>
 
 </html>

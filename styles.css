@@ -1,26 +1,186 @@
-/* Забезпечуємо, що кожен слайд займає 100% ширини і висоти фрейма */
-.slide {
-    flex: 0 0 100%;
-    /* Кожен слайд займає 100% ширини батьківського контейнера */
+body {
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    background-color: #F8F8F8;
+    height: 100vh;
+    touch-action: pan-y;
+}
+
+/* Контейнер для центрування всього контенту */
+.app-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f4f6;
+}
+
+.app-inner-wrapper {
+    width: 100%;
     height: 100%;
+    overflow-x: hidden;
+}
+
+#mobile-frame {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    max-height: 800px;
+    background-color: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+
+#slider {
+    width: 300%;
+    height: 100%;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 2rem;
-    transition: transform 0.5s ease-out;
-    /* Плавний перехід для свайпу */
+    user-select: none;
 }
 
-/* Ефект для картки з текстом */
-.card-content {
-    padding: 1.5rem;
+#slide-1 {
+    background-color: #FCD34D;
+    color: #374151;
+}
+
+#slide-2 {
+    background-color: #1D4ED8;
+    color: #FFFFFF;
+}
+
+#slide-3 {
+    background-color: #059669;
+    color: #FFFFFF;
+}
+
+
+.slide-card {
     border-radius: 1.5rem;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    max-width: 90vw;
-    /* Максимальна ширина відносно в'юпорту */
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
     animation: fadeIn 1s ease-out;
+    width: 100%;
+}
+
+/* slide-1  */
+.slide-card-sun {
+    background-color: rgb(255 255 255 / 0.9);
+}
+
+.slide-title--sun {
+    font-size: 55px;
+    margin-bottom: 0.75rem;
+    /* mb-3 */
+    color: #d97706;
+}
+
+
+.slide-card--nature {
+    background-color: rgb(20 83 45 / 0.8);
+    /* bg-green-800 bg-opacity-80 */
+    color: #FFFFFF;
+    /* text-white */
+}
+
+/* 3. Стилі для заголовків H1/H2 */
+.slide-title {
+    font-weight: 900;
+    letter-spacing: -0.05em;
+}
+
+
+
+
+.slide-title--nature {
+    color: #a7f3d0;
+    /* text-green-300 */
+}
+
+
+
+
+/* 5. Стилі для параграфа P */
+.slide-text {
+    font-size: 1.125rem;
+    /* text-lg / text-xl */
+    font-weight: 500;
+    /* font-medium / font-light */
+}
+
+
+.slide-text--nature {
+    font-size: 1.25rem;
+    /* text-xl */
+    font-weight: 300;
+    /* font-light */
+    line-height: 1.625;
+    /* leading-relaxed */
+}
+
+/* 6. Стилі для підказки (Свайпніть вліво) */
+.slide-hint {
+    margin-top: 2rem;
+    /* mt-8 */
+    font-size: 1.25rem;
+    /* text-xl */
+    font-weight: 700;
+    /* font-bold */
+    color: #92400e;
+    /* text-yellow-800 */
+}
+
+/* 7. Стилі для пагінації (точки) */
+.pagination-dots {
+    position: absolute;
+    /* absolute */
+    bottom: 1.5rem;
+    /* bottom-6 */
+    left: 50%;
+    /* left-1/2 */
+    transform: translateX(-50%);
+    /* transform -translate-x-1/2 */
+    display: flex;
+    /* flex */
+    gap: 0.75rem;
+    /* space-x-3 */
+    z-index: 10;
+    /* z-10 */
+}
+
+.dot {
+    width: 0.75rem;
+    /* w-3 */
+    height: 0.75rem;
+    /* h-3 */
+    background-color: rgb(255 255 255 / 0.5);
+    /* bg-white bg-opacity-50 */
+    border-radius: 9999px;
+    /* rounded-full */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* shadow-lg */
+    transition: all 0.3s ease-in-out;
+    /* transition-all duration-300 */
+}
+
+.dot.active {
+    background-color: #FFFFFF;
+    /* bg-white */
 }
 
 /* Анімація появи контенту */

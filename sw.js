@@ -1,4 +1,38 @@
 const CACHE_NAME = 'pwa-simple-cache-v1';
+// 1. Інсталяція Service Worker і кешування ресурсів
+self.addEventListener('install', event => {
+    // !!! НОВЕ: Примусова активація нового SW, не чекаючи закриття старих вкладок
+    self.skipWaiting();
+
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(cache => {
+                console.log('Кешування ресурсів');
+                return cache.addAll(urlsToCache);
+            })
+    );
+});
+
+// 2. Активація Service Worker (очищення старих кешів)
+self.addEventListener('activate', event => {
+    // !!! НОВЕ: Примусове взяття контролю над усіма клієнтами (відкритими вкладками)
+    event.waitUntil(self.clients.claim());
+
+    event.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map(cacheName => {
+                    if (cacheName !== CACHE_NAME) {
+                        console.log('Видалення старого кешу:', cacheName);
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        })
+    );
+});
+
+// ... fetch event listener
 const urlsToCache = [
     '/',
     '/index.html',
@@ -51,3 +85,4 @@ self.addEventListener('fetch', event => {
             })
     );
 });
+
