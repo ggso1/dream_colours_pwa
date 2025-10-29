@@ -134,14 +134,13 @@ function handleMove(event) {
     // Розрахунок нового зміщення
     let newTranslate = currentTranslate + diffX;
 
-    // Обмеження, щоб слайдер не виходив за межі (з "гумовим" ефектом)
+    // Обмеження, щоб слайдер не виходив за межі
     if (newTranslate > 0) {
-        // Свайп вправо на першій сторінці (еластичність 20%)
+        // Перша сторінка - пружний ефект
         newTranslate = diffX * 0.2;
     } else if (newTranslate < maxTranslate) {
-        // Свайп вліво на останній сторінці (еластичність 20%)
-        const overflow = newTranslate - maxTranslate;
-        newTranslate = maxTranslate + overflow * 0.2;
+        // Остання сторінка - жорстке обмеження
+        newTranslate = maxTranslate;
     }
 
     slider.style.transform = `translateX(${newTranslate}px)`;
@@ -167,12 +166,12 @@ function handleEnd(event) {
 
     let newPage = currentPage;
 
-    // Перевірка, чи відбувся свайп за поріг
+    // Перевірка, чи відбувся свайп за поріг та чи не знаходимося на останній сторінці
     if (Math.abs(diffX) > SWIPE_THRESHOLD) {
-        if (diffX < 0) {
-            // Свайп вліво (наступна сторінка)
-            newPage = Math.min(maxPage, currentPage + 1);
-        } else {
+        if (diffX < 0 && currentPage < maxPage) {
+            // Свайп вліво (наступна сторінка), тільки якщо не на останній
+            newPage = currentPage + 1;
+        } else if (diffX > 0) {
             // Свайп вправо (попередня сторінка)
             newPage = Math.max(0, currentPage - 1);
         }
@@ -231,23 +230,23 @@ window.onload = initSlider;
 
 
 
-    // Функція відкриття модального вікна
-    function openModal(color) {
-        document.getElementById('modal-' + color).style.display = 'block';
-    }
+// Функція відкриття модального вікна
+function openModal(color) {
+    document.getElementById('modal-' + color).style.display = 'block';
+}
 
-    // Функція закриття модального вікна
-    function closeModal(color) {
-        document.getElementById('modal-' + color).style.display = 'none';
-    }
+// Функція закриття модального вікна
+function closeModal(color) {
+    document.getElementById('modal-' + color).style.display = 'none';
+}
 
-    // Закриття модального вікна при кліку поза ним
-    window.onclick = function(event) {
-        // Отримуємо всі модальні вікна
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => {
-            if (event.target == modal) {
-        modal.style.display = 'none';
-            }
-        });
-    }
+// Закриття модального вікна при кліку поза ним
+window.onclick = function (event) {
+    // Отримуємо всі модальні вікна
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    });
+}

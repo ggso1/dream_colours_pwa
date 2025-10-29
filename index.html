@@ -115,24 +115,78 @@
 
                     <!-- СЛАЙД 4 -->
                     <div id="slide-4" class="slide">
-                        <div class="slide-card slide-card--dream">
-                            <h1 class="slide-title slide-title--dream">Кольори Моєї Мрії</h1>
-                            <p class="slide-text">Жовтий колір — це світло, енергія та початок нової подорожі відчуттів.
-                            </p>
+                        <div class="slide-card slide-card--inspiration">
+                            <h2 class="slide-title slide-title--inspiration">✨ Надихайся</h2>
+                            <p class="slide-text">Знайди натхнення у кольорах природи та мистецтва.</p>
+                            <div class="inspiration-gallery">
+                                <div class="inspiration-item">🎨 Мистецтво</div>
+                                <div class="inspiration-item">🌅 Захід сонця</div>
+                                <div class="inspiration-item">🌸 Квіти</div>
+                            </div>
                         </div>
                         <div class="slide-hint">
-                            <p>Дякуємо за подорож!</p>
+                            <p>Свайпніть вліво &rarr;</p>
+                        </div>
+                    </div>
+
+                    <!-- СЛАЙД 5 -->
+                    <div id="slide-5" class="slide">
+                        <div class="slide-card slide-card--meditation">
+                            <h2 class="slide-title slide-title--meditation">🧘‍♀️ Медитація</h2>
+                            <p class="slide-text">Знайдіть свій внутрішній спокій через кольорову медитацію.</p>
+                            <div class="meditation-timer">
+                                <button class="timer-button" onclick="startMeditation()">Почати медитацію</button>
+                                <div class="timer-display">5:00</div>
+                            </div>
+                        </div>
+                        <div class="slide-hint">
+                            <p>Свайпніть вліво &rarr;</p>
+                        </div>
+                    </div>
+
+                    <!-- СЛАЙД 6 -->
+                    <div id="slide-6" class="slide">
+                        <div class="slide-card slide-card--journal">
+                            <h2 class="slide-title slide-title--journal">📔 Щоденник Кольорів</h2>
+                            <p class="slide-text">Записуйте свої відчуття та емоції, пов'язані з кольорами.</p>
+                            <div class="journal-entry">
+                                <textarea placeholder="Які кольори ви помітили сьогодні?"
+                                    class="journal-textarea"></textarea>
+                                <button class="save-button" onclick="saveJournalEntry()">Зберегти</button>
+                            </div>
+                        </div>
+                        <div class="slide-hint">
+                            <p>Свайпніть вліво &rarr;</p>
+                        </div>
+                    </div>
+
+                    <!-- СЛАЙД 7 -->
+                    <div id="slide-7" class="slide">
+                        <div class="slide-card slide-card--finish">
+                            <h2 class="slide-title slide-title--finish">🌈 Дякуємо!</h2>
+                            <p class="slide-text">Ви пройшли всю кольорову подорож. Нехай ваш світ буде яскравим!</p>
+                        </div>
+                        <div class="slide-hint">
+                            <p>Почати спочатку ↺</p>
                         </div>
                     </div>
                 </div>
-                <div id="pagination" class="pagination-dots">
-                    <span id="dot-0" class="dot active"></span>
-                    <span id="dot-1" class="dot"></span>
-                    <span id="dot-2" class="dot"></span>
-                    <span id="dot-3" class="dot"></span>
-                </div>
             </div>
         </div>
+    </div>
+
+
+    <div id="pagination" class="pagination-dots">
+        <span id="dot-0" class="dot active"></span>
+        <span id="dot-1" class="dot"></span>
+        <span id="dot-2" class="dot"></span>
+        <span id="dot-3" class="dot"></span>
+        <span id="dot-4" class="dot"></span>
+        <span id="dot-5" class="dot"></span>
+        <span id="dot-6" class="dot"></span>
+    </div>
+    </div>
+    </div>
     </div>
 
     <script src="app.js"></script>
