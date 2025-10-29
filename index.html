@@ -17,36 +17,63 @@
     <div class="app-container">
         <div id="mobile-frame">
             <div id="app" class="app-inner-wrapper">
-
+    
                 <div id="slider">
+                    <!-- СЛАЙД 1: КОЛЬОРИ МРІЇ (ЖОВТИЙ) -->
                     <div id="slide-1" class="slide">
                         <div class="slide-card slide-card--sun">
                             <h1 class="slide-title slide-title--sun">Кольори Моєї Мрії</h1>
-                            <p class="slide-text">Жовтий колір — це світло, енергія та початок нової подорожі
-                                відчуттів.</p>
+                            <p class="slide-text">Жовтий колір — це світло, енергія та початок нової подорожі відчуттів.
+                            </p>
                         </div>
                         <div class="slide-hint">
                             <p>Свайпніть вліво &rarr;</p>
                         </div>
                     </div>
-
+    
+                    <!-- СЛАЙД 2: СЕКЦІЯ НАСТРОЇВ ТА ПОРАД (СИНІЙ) -->
                     <div id="slide-2" class="slide">
-                        <div class="slide-card slide-card--ocean">
-                            <h2 class="slide-title slide-title--ocean">Що Вас турбує?</h2>
-                    
-                            <textarea id="user-feeling" class="feeling-textarea" placeholder="Опишіть коротко Вашу ситуацію або питання..."
-                                rows="4"></textarea>
-                    
-                            <button class="advice-button" onclick="getAIAdvice()" id="advice-submit-button">
-                                Отримати коротку пораду 🌊
-                            </button>
-                    
-                            <div id="ai-advice-output" class="ai-advice">
-                                Тут з'явиться Ваша порада...
+                        <div class="slide-card slide-card--mood">
+                            <h2 class="slide-title slide-title--mood">Обери свій Настрій</h2>
+                            <p class="slide-text">Яку пораду ти шукаєш сьогодні?</p>
+                        </div>
+    
+                        <div class="mood-selector-section">
+                            <!-- Сум -->
+                            <div class="mood-option" data-mood="sad" onclick="showMoodTip(this)">
+                                <span class="emoji">😢</span>
+                                <p class="mood-label">Сум</p>
+                            </div>
+    
+                            <!-- Радість -->
+                            <div class="mood-option" data-mood="happy" onclick="showMoodTip(this)">
+                                <span class="emoji">😊</span>
+                                <p class="mood-label">Радість</p>
+                            </div>
+    
+                            <!-- Злість -->
+                            <div class="mood-option" data-mood="angry" onclick="showMoodTip(this)">
+                                <span class="emoji">😡</span>
+                                <p class="mood-label">Злість</p>
+                            </div>
+    
+                            <!-- Спокій (додатковий настрій) -->
+                            <div class="mood-option" data-mood="calm" onclick="showMoodTip(this)">
+                                <span class="emoji">🧘</span>
+                                <p class="mood-label">Спокій</p>
                             </div>
                         </div>
+    
+                        <div id="tip-display" class="tip-display">
+                            Натисніть на емодзі, щоб отримати пораду для цього настрою.
+                        </div>
+    
+                        <div class="slide-hint slide-hint--blue">
+                            <p>Свайпніть вліво &rarr;</p>
+                        </div>
                     </div>
-
+    
+                    <!-- СЛАЙД 3: ПРИРОДА (ЗЕЛЕНИЙ) -->
                     <div id="slide-3" class="slide">
                         <div class="slide-card slide-card--nature">
                             <h2 class="slide-title slide-title--nature">ПРИРОДА</h2>
@@ -55,10 +82,10 @@
                             </p>
                         </div>
                     </div>
-
+    
                 </div>
             </div>
-
+    
             <div id="pagination" class="pagination-dots">
                 <span id="dot-0" class="dot active"></span>
                 <span id="dot-1" class="dot"></span>
@@ -66,53 +93,6 @@
             </div>
         </div>
     </div>
-
-    <script>const API_URL = "http://127.0.0.1:8000/get_advice"; // !!! УВАГА: Замініть на публічний URL, коли будете деплоїти !!!
-
-        async function getAIAdvice() {
-            const textarea = document.getElementById('user-feeling');
-            const output = document.getElementById('ai-advice-output');
-            const button = document.getElementById('advice-submit-button');
-            const query = textarea.value.trim();
-
-            if (query.length < 5) {
-                output.innerHTML = "Будь ласка, введіть більше деталей (мін. 5 символів).";
-                return;
-            }
-
-            // 1. Блокування інтерфейсу
-            button.disabled = true;
-            button.textContent = "Обробка... ⏳";
-            output.innerHTML = "ШІ обмірковує Вашу ситуацію...";
-
-            try {
-                // 2. Відправка запиту на ваш FastAPI-сервер
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ query: query })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Помилка API! Статус: ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                // 3. Виведення поради
-                output.innerHTML = `<span style="font-weight: 600;">Порада:</span> ${data.advice}`;
-
-            } catch (error) {
-                console.error('Помилка під час отримання поради від ШІ:', error);
-                output.innerHTML = "Вибачте, сталася помилка з'єднання. Спробуйте пізніше.";
-            } finally {
-                // 4. Розблокування інтерфейсу
-                button.disabled = false;
-                button.textContent = "Отримати коротку пораду 🌊";
-            }
-        }</script>
 
     <script src="app.js"></script>
 </body>

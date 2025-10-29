@@ -1,5 +1,45 @@
+
+// Об'єкт зі зборами порад для різних настроїв
+const moodTips = {
+    sad: "❤️ Порада для Суму: Дозвольте собі сумувати, але потім зробіть маленьку, приємну для вас справу (випийте какао, подивіться улюблений фільм).",
+    happy: "☀️ Порада для Радості: Поділіться своїм щастям з кимось і подумайте про три речі, за які ви вдячні сьогодні. Це продовжить відчуття радості!",
+    angry: "🔥 Порада для Злості: Зробіть глибокий вдих і паузу. Спробуйте фізичну активність (пробіжка, присідання), щоб вивільнити енергію, не руйнуючи нічого.",
+    calm: "🧘 Порада для Спокою: Знайдіть час для тиші. Навіть 5 хвилин без гаджетів допоможуть перезавантажити нервову систему.",
+    default: "Натисніть на емодзі, щоб отримати пораду для цього настрою."
+};
+
+/**
+ * Показує пораду, відповідну обраному емодзі, та виділяє активний елемент.
+ * @param {HTMLElement} element - Контейнер емодзі, на який клікнули.
+ */
+function showMoodTip(element) {
+    const mood = element.getAttribute('data-mood'); // Отримуємо 'sad', 'happy', 'angry', 'calm'
+    const tipText = moodTips[mood];
+    const displayElement = document.getElementById('tip-display');
+    const allOptions = document.querySelectorAll('.mood-option');
+
+    // 1. Прибрати активний клас з усіх опцій
+    allOptions.forEach(option => option.classList.remove('active'));
+
+    // 2. Додати активний клас до клікнутого елемента
+    element.classList.add('active');
+
+    // 3. Показати відповідну пораду з анімацією
+    if (tipText) {
+        displayElement.style.opacity = '0'; // Для ефекту зникнення/появи
+
+        setTimeout(() => {
+            displayElement.textContent = tipText;
+            displayElement.style.opacity = '1';
+        }, 150); // Затримка для анімації
+    } else {
+        displayElement.textContent = moodTips.default;
+        displayElement.style.opacity = '1';
+    }
+}
+
 // =======================================================
-// JAVASCRIPT ЛОГІКА СЛАЙДЕРА
+// JAVАСRIPТ ЛОГІКА СЛАЙДЕРА
 // =======================================================
 
 // Ініціалізація змінних
@@ -16,12 +56,12 @@ let startX = 0;
 let isDragging = false;
 let currentTranslate = 0;
 let slideWidth = 0; // Ширина одного слайда
+const mobileFrame = document.getElementById('mobile-frame');
 
 /**
  * Визначає ширину слайда, яка дорівнює ширині мобільного фрейму.
  */
 function getSlideWidth() {
-    const mobileFrame = document.getElementById('mobile-frame');
     slideWidth = mobileFrame.clientWidth;
 }
 
@@ -30,11 +70,7 @@ function getSlideWidth() {
  */
 function updateDots() {
     dots.forEach((dot, index) => {
-        if (index === currentPage) {
-            dot.classList.remove('bg-opacity-50');
-        } else {
-            dot.classList.add('bg-opacity-50');
-        }
+        dot.classList.toggle('active', index === currentPage);
     });
 }
 
@@ -125,6 +161,7 @@ function handleEnd(event) {
 
     getSlideWidth();
 
+    // Використовуємо changedTouches для touch, clientX для mouse
     const endX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
     const diffX = endX - startX;
 
@@ -150,74 +187,41 @@ function handleEnd(event) {
 // Визначаємо контейнер, що приймає свайпи
 const touchElement = document.getElementById('mobile-frame');
 
-// Обробники подій для Touch (Мобільні пристрої)
-touchElement.addEventListener('touchstart', handleStart);
-// Додаємо пасивну опцію false, щоб event.preventDefault() в handleMove працював
-touchElement.addEventListener('touchmove', handleMove, { passive: false });
-touchElement.addEventListener('touchend', handleEnd);
+/**
+ * Ініціалізація обробників подій слайдера.
+ */
+function initSlider() {
+    // Обробники подій для Touch (Мобільні пристрої)
+    touchElement.addEventListener('touchstart', handleStart, { passive: true }); // passive: true, щоб не блокувати основний потік
+    touchElement.addEventListener('touchmove', handleMove, { passive: false }); // passive: false, для event.preventDefault()
+    touchElement.addEventListener('touchend', handleEnd);
 
-// Обробники подій для Mouse (Десктоп)
-touchElement.addEventListener('mousedown', handleStart);
-// Додаємо до вікна, щоб не обривався свайп, якщо миша вийшла за межі фрейма
-window.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-        handleMove(e);
-    }
-});
-window.addEventListener('mouseup', handleEnd);
-
-// Обробка зміни розміру вікна для коректного позиціонування
-window.addEventListener('resize', () => {
-    snapToPage(false); // Без анімації
-});
-
-// Початкова ініціалізація, коли DOM повністю завантажено
-window.onload = () => {
-    snapToPage(false);
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    const textarea = document.getElementById('feeling-text');
-    const button = document.querySelector('.advice-button');
-    const output = document.getElementById('ai-advice-output');
-
-    button.addEventListener('click', async () => {
-        const userText = textarea.value.trim();
-
-        if (userText.length === 0) {
-            output.innerHTML = 'Будь ласка, опишіть, що Ви відчуваєте, щоб отримати пораду.';
-            return;
-        }
-
-        // 1. Початок завантаження
-        output.innerHTML = '***ШІ (Gemini) аналізує Ваші почуття і готує пораду...***';
-        button.disabled = true;
-
-        try {
-            // 2. Відправлення запиту на ваш БЕКЕНД-СЕРВЕР
-            const response = await fetch('/api/get-ai-advice', { // ЦЕЙ ШЛЯХ ВАМ ПОТРІБНО НАЛАШТУВАТИ
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ feeling: userText })
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            // 3. Вивід відповіді ШІ
-            output.innerHTML = data.advice; // Очікуємо, що бекенд поверне об'єкт з полем 'advice'
-
-        } catch (error) {
-            console.error('Помилка при отриманні поради від ШІ:', error);
-            output.innerHTML = 'Виникла помилка під час з’єднання з ШІ. Спробуйте ще раз.';
-        } finally {
-            // 4. Завершення завантаження
-            button.disabled = false;
+    // Обробники подій для Mouse (Десктоп)
+    touchElement.addEventListener('mousedown', handleStart);
+    // Додаємо до вікна, щоб не обривався свайп, якщо миша вийшла за межі фрейма
+    window.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            handleMove(e);
         }
     });
-});
+    window.addEventListener('mouseup', handleEnd);
+
+    // Обробники кліку на точки пагінації
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentPage = index;
+            snapToPage();
+        });
+    });
+
+    // Обробка зміни розміру вікна для коректного позиціонування
+    window.addEventListener('resize', () => {
+        snapToPage(false); // Без анімації
+    });
+
+    // Початкова ініціалізація
+    snapToPage(false);
+}
+
+// Запускаємо ініціалізацію після завантаження DOM
+window.onload = initSlider;
