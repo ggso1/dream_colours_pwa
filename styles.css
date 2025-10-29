@@ -183,6 +183,107 @@ body {
     /* bg-white */
 }
 
+/* --- СТИЛІ ДЛЯ СЛАЙДУ 2 (ОКЕАН) --- */
+
+/* Специфічні стилі для slide-card--ocean */
+.slide-card--ocean {
+    background-color: rgb(29 78 216 / 0.85);
+    /* blue-700 з прозорістю */
+    padding: 1.5rem;
+    /* Додайте відступи всередині картки */
+    display: flex;
+    /* Для компонування елементів */
+    flex-direction: column;
+    gap: 1rem;
+    /* Відстань між елементами форми */
+}
+
+.slide-title--ocean {
+    font-size: 2.25rem;
+    /* text-4xl */
+    color: #BFDBFE;
+    /* text-blue-200 */
+    margin-bottom: 0;
+}
+
+.slide-text--ocean {
+    font-size: 1.125rem;
+    /* text-lg */
+    font-weight: 300;
+    /* font-light */
+    line-height: 1.5;
+}
+
+/* Стилі для поля вводу тексту */
+.feeling-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    border: 2px solid #60A5FA;
+    /* border-blue-400 */
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #1F2937;
+    /* text-gray-800 */
+    resize: vertical;
+    /* Дозволити вертикальну зміну розміру */
+    transition: all 0.3s ease-in-out;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.feeling-textarea:focus {
+    outline: none;
+    border-color: #3B82F6;
+    /* blue-500 */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+    /* Фокусний ефект */
+}
+
+/* Стилі для кнопки */
+.advice-button {
+    background-color: #3B82F6;
+    /* blue-500 */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    font-size: 1.125rem;
+    /* text-lg */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.advice-button:hover {
+    background-color: #2563EB;
+    /* blue-600 */
+}
+
+.advice-button:active {
+    transform: translateY(1px);
+}
+
+/* Стилі для виводу поради від ШІ */
+.ai-advice {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgb(255 255 255 / 0.15);
+    /* Світлий фон поради */
+    color: #E0F2F1;
+    /* Світлий текст */
+    border-radius: 0.75rem;
+    font-style: italic;
+    text-align: left;
+    min-height: 40px;
+    /* Мінімальна висота, щоб не стрибало */
+    display: flex;
+    align-items: center;
+}
+
 /* Анімація появи контенту */
 @keyframes fadeIn {
     from {

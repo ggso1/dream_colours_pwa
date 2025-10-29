@@ -57,6 +57,10 @@ function snapToPage(animate = true) {
  * Обробник початку взаємодії (миша або дотик).
  */
 function handleStart(event) {
+    // Якщо взаємодія почалася всередині елементів вводу — не ініціюємо свайп
+    if (event.target && event.target.closest && event.target.closest('textarea, input, button, select, [contenteditable]')) {
+        return;
+    }
     // Запобігаємо стандартному перетягуванню зображень, якщо це desktop
     if (event.type === 'mousedown') {
         event.preventDefault();
@@ -148,7 +152,8 @@ const touchElement = document.getElementById('mobile-frame');
 
 // Обробники подій для Touch (Мобільні пристрої)
 touchElement.addEventListener('touchstart', handleStart);
-touchElement.addEventListener('touchmove', handleMove);
+// Додаємо пасивну опцію false, щоб event.preventDefault() в handleMove працював
+touchElement.addEventListener('touchmove', handleMove, { passive: false });
 touchElement.addEventListener('touchend', handleEnd);
 
 // Обробники подій для Mouse (Десктоп)
@@ -171,3 +176,48 @@ window.onload = () => {
     snapToPage(false);
 };
 
+document.addEventListener('DOMContentLoaded', () => {
+    const textarea = document.getElementById('feeling-text');
+    const button = document.querySelector('.advice-button');
+    const output = document.getElementById('ai-advice-output');
+
+    button.addEventListener('click', async () => {
+        const userText = textarea.value.trim();
+
+        if (userText.length === 0) {
+            output.innerHTML = 'Будь ласка, опишіть, що Ви відчуваєте, щоб отримати пораду.';
+            return;
+        }
+
+        // 1. Початок завантаження
+        output.innerHTML = '***ШІ (Gemini) аналізує Ваші почуття і готує пораду...***';
+        button.disabled = true;
+
+        try {
+            // 2. Відправлення запиту на ваш БЕКЕНД-СЕРВЕР
+            const response = await fetch('/api/get-ai-advice', { // ЦЕЙ ШЛЯХ ВАМ ПОТРІБНО НАЛАШТУВАТИ
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ feeling: userText })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            // 3. Вивід відповіді ШІ
+            output.innerHTML = data.advice; // Очікуємо, що бекенд поверне об'єкт з полем 'advice'
+
+        } catch (error) {
+            console.error('Помилка при отриманні поради від ШІ:', error);
+            output.innerHTML = 'Виникла помилка під час з’єднання з ШІ. Спробуйте ще раз.';
+        } finally {
+            // 4. Завершення завантаження
+            button.disabled = false;
+        }
+    });
+});

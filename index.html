@@ -33,10 +33,17 @@
                     <div id="slide-2" class="slide">
                         <div class="slide-card slide-card--ocean">
                             <h2 class="slide-title slide-title--ocean">Що Вас турбує?</h2>
-                            <p class="slide-text slide-text--ocean">
-                                Нехай синява принесе вам глибокий спокій, а ваші мрії завжди будуть такими ж безмежними,
-                                як океан.
-                            </p>
+                    
+                            <textarea id="user-feeling" class="feeling-textarea" placeholder="Опишіть коротко Вашу ситуацію або питання..."
+                                rows="4"></textarea>
+                    
+                            <button class="advice-button" onclick="getAIAdvice()" id="advice-submit-button">
+                                Отримати коротку пораду 🌊
+                            </button>
+                    
+                            <div id="ai-advice-output" class="ai-advice">
+                                Тут з'явиться Ваша порада...
+                            </div>
                         </div>
                     </div>
 
@@ -59,6 +66,53 @@
             </div>
         </div>
     </div>
+
+    <script>const API_URL = "http://127.0.0.1:8000/get_advice"; // !!! УВАГА: Замініть на публічний URL, коли будете деплоїти !!!
+
+        async function getAIAdvice() {
+            const textarea = document.getElementById('user-feeling');
+            const output = document.getElementById('ai-advice-output');
+            const button = document.getElementById('advice-submit-button');
+            const query = textarea.value.trim();
+
+            if (query.length < 5) {
+                output.innerHTML = "Будь ласка, введіть більше деталей (мін. 5 символів).";
+                return;
+            }
+
+            // 1. Блокування інтерфейсу
+            button.disabled = true;
+            button.textContent = "Обробка... ⏳";
+            output.innerHTML = "ШІ обмірковує Вашу ситуацію...";
+
+            try {
+                // 2. Відправка запиту на ваш FastAPI-сервер
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query: query })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Помилка API! Статус: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // 3. Виведення поради
+                output.innerHTML = `<span style="font-weight: 600;">Порада:</span> ${data.advice}`;
+
+            } catch (error) {
+                console.error('Помилка під час отримання поради від ШІ:', error);
+                output.innerHTML = "Вибачте, сталася помилка з'єднання. Спробуйте пізніше.";
+            } finally {
+                // 4. Розблокування інтерфейсу
+                button.disabled = false;
+                button.textContent = "Отримати коротку пораду 🌊";
+            }
+        }</script>
 
     <script src="app.js"></script>
 </body>
