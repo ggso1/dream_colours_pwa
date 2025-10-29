@@ -1,254 +1,405 @@
- /* ГЛОБАЛЬНІ СТИЛІ */
- body {
-     font-family: 'Inter', sans-serif;
-     overflow: hidden;
-     background-color: #F8F8F8;
-     height: 100vh;
-     touch-action: manipulation;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     margin: 0;
- }
+/* ГЛОБАЛЬНІ СТИЛІ */
+body {
+    font-family: 'Inter', sans-serif;
+    /* Видаляємо overflow: hidden; з body, оскільки модальні вікна повинні
+       бути видимі, але залишаємо його для #mobile-frame */
+    background-color: #F8F8F8;
+    height: 100vh;
+    touch-action: manipulation;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
 
- /* Контейнер для центрування всього контенту */
- .app-container {
-     width: 100%;
-     height: 100vh;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     background-color: #f3f4f6;
- }
+/* Контейнер для центрування всього контенту */
+.app-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f4f6;
+}
 
- .app-inner-wrapper {
-     width: 100%;
-     height: 100%;
-     overflow-x: hidden;
-     /* Приховуємо горизонтальний скролбар контейнера слайдера */
- }
+.app-inner-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    /* Приховуємо горизонтальний скролбар контейнера слайдера */
+}
 
- #mobile-frame {
-     width: 100%;
-     max-width: 400px;
-     height: 100vh;
-     max-height: 800px;
-     background-color: white;
-     border-radius: 1.5rem;
-     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-     position: relative;
-     overflow: hidden;
- }
+#mobile-frame {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    max-height: 800px;
+    background-color: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+    /* Залишаємо прихованим, щоб слайдер не виходив за межі */
+}
 
- /* СЛАЙДЕР */
- #slider {
-     width: 300%;
-     /* Три слайди по 100% */
-     height: 100%;
-     display: flex;
-     transition: transform 0.5s ease-in-out;
- }
+/* СЛАЙДЕР */
+#slider {
+    width: 400%;
+    /* Чотири слайди по 100% */
+    height: 100%;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
 
- .slide {
-     height: 100%;
-     flex-shrink: 0;
-     width: calc(100% / 3);
-     /* Кожен слайд займає 1/3 ширини контейнера */
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     text-align: center;
-     user-select: none;
-     box-sizing: border-box;
-     padding: 20px;
-     overflow-y: auto;
- }
+.slide {
+    height: 100%;
+    flex-shrink: 0;
+    width: calc(100% / 4);
+    /* Кожен слайд займає 1/3 ширини контейнера */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow-y: auto;
+    /* Додаємо overflow-y: auto; для прокручування контенту слайда,
+       якщо він більший за висоту фрейму */
+}
 
- #slide-1 {
-     background-color: #FCD34D;
-     /* Жовтий */
-     color: #374151;
- }
+#slide-1 {
+    background-color: #FCD34D;
+    color: #374151;
+}
 
- #slide-2 {
-     background-color: #DBEAFE;
-     /* Світло-синій (для настроїв) */
-     color: #1E3A8A;
-     justify-content: flex-start;
-     /* Вирівнювання контенту слайда 2 */
-     padding-top: 50px;
- }
+#slide-2 {
+    background-color: #DBEAFE;
+    color: #1E3A8A;
+    justify-content: flex-start;
+    padding-top: 50px;
+}
 
- #slide-3 {
-     background-color: #059669;
-     /* Зелений */
-     color: #FFFFFF;
- }
+/* Зміна кольору тла на нейтральний, щоб кольорові квадрати були помітнішими */
+#slide-3 {
+    background-color: #059669;
+    color: #FFFFFF;
+    justify-content: flex-start;
+    /* Вирівнювання контенту на початок */
+    padding-top: 50px;
+}
 
- .slide-card {
-     border-radius: 1.5rem;
-     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-     width: 90%;
-     margin-bottom: 20px;
-     padding: 20px;
-     animation: fadeIn 1s ease-out;
- }
+#slide-4 {
+    background-color: #FEE2E2;
+    /* Наприклад, світло-червоний */
+    color: #991B1B;
+    justify-content: center;
+    padding-top: 20px;
+}
 
- /* СТИЛІ СЛАЙДА 1 (SUN) */
- .slide-card--sun {
-     background-color: rgb(255 255 255 / 0.9);
- }
+.slide-card {
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    margin-bottom: 20px;
+    padding: 20px;
+    animation: fadeIn 1s ease-out;
+}
 
- .slide-title--sun {
-     font-size: 55px;
-     margin-bottom: 0.75rem;
-     color: #d97706;
- }
+/* СТИЛІ СЛАЙДА 1 (SUN) */
+.slide-card--sun {
+    background-color: rgb(255 255 255 / 0.9);
+}
 
- /* СТИЛІ СЛАЙДА 2 (MOOD) */
- .slide-card--mood {
-     background-color: #FFFFFF;
-     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
- }
+.slide-title--sun {
+    font-size: 55px;
+    margin-bottom: 0.75rem;
+    color: #d97706;
+}
 
- .slide-title--mood {
-     font-size: 32px;
-     font-weight: 800;
-     color: #1E3A8A;
- }
+/* СТИЛІ СЛАЙДА 2 (MOOD) */
+.slide-card--mood {
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
 
- /* СТИЛІ СЛАЙДА 3 (NATURE) */
- .slide-card--nature {
-     background-color: rgb(20 83 45 / 0.8);
-     color: #FFFFFF;
- }
+.slide-title--mood {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1E3A8A;
+}
 
- .slide-title--nature {
-     color: #a7f3d0;
- }
+/* СТИЛІ СЛАЙДА 3 (NATURE - ЗАСТАРІЛИЙ) ТА КОЛЬОРІВ (НОВИЙ) */
+.slide-card--nature,
+.slide-card--colors {
+    background-color: rgb(20 83 45 / 0.8);
+    color: #FFFFFF;
+    /* Додано відступи для секції кольорів */
+    padding: 30px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
 
- /* ЗАГАЛЬНІ СТИЛІ КАРТОК/ТЕКСТУ */
- .slide-title {
-     font-weight: 900;
-     letter-spacing: -0.05em;
-     margin: 0;
-     padding: 0;
- }
+.slide-title--nature,
+.slide-title--colors {
+    color: #a7f3d0;
+}
 
- .slide-text {
-     font-size: 1.125rem;
-     font-weight: 500;
-     margin-top: 10px;
- }
+/* ЗАГАЛЬНІ СТИЛІ КАРТОК/ТЕКСТУ */
+.slide-title {
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    margin: 0;
+    padding: 0;
+}
 
- .slide-text--nature {
-     font-size: 1.25rem;
-     font-weight: 300;
-     line-height: 1.625;
- }
+.slide-text {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-top: 10px;
+}
 
- .slide-hint {
-     margin-top: 2rem;
-     font-size: 1.25rem;
-     font-weight: 700;
-     color: #92400e;
- }
+.slide-text--nature,
+.slide-text--colors {
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.625;
+}
 
- .slide-hint--blue {
-     color: #1E3A8A;
-     opacity: 0.7;
- }
+.slide-hint {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #92400e;
+}
 
- /* СТИЛІ ДЛЯ СЕКЦІЇ НАСТРОЇВ (MOOD SELECTOR) */
- .mood-selector-section {
-     display: flex;
-     justify-content: center;
-     gap: 20px;
-     width: 90%;
-     margin: 20px auto;
-     background-color: #FFFFFF;
-     padding: 15px 10px;
-     border-radius: 12px;
-     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
- }
+.slide-hint--blue {
+    color: #1E3A8A;
+    opacity: 0.7;
+}
 
- .mood-option {
-     text-align: center;
-     cursor: pointer;
-     padding: 10px 5px;
-     border-radius: 8px;
-     transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
-     flex: 1;
-     max-width: 100px;
- }
+/* СТИЛІ ДЛЯ СЕКЦІЇ НАСТРОЇВ (MOOD SELECTOR) */
+.mood-selector-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 90%;
+    margin: 20px auto;
+    background-color: #FFFFFF;
+    padding: 15px 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
 
- .mood-option:hover {
-     background-color: #F3F4F6;
-     transform: scale(1.05);
- }
+.mood-option {
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 5px;
+    border-radius: 8px;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    flex: 1;
+    max-width: 100px;
+}
 
- .emoji {
-     font-size: 40px;
-     display: block;
-     line-height: 1;
- }
+.mood-option:hover {
+    background-color: #F3F4F6;
+    transform: scale(1.05);
+}
 
- .mood-label {
-     margin-top: 5px;
-     font-size: 14px;
-     font-weight: 600;
-     color: #4B5563;
- }
+.emoji {
+    font-size: 40px;
+    display: block;
+    line-height: 1;
+}
 
- /* Стиль для активного (обраного) настрою */
- .mood-option.active {
-     background-color: #E0F2FE;
-     box-shadow: 0 0 0 3px #3B82F6;
- }
+.mood-label {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4B5563;
+}
 
- /* Стилі для відображення поради */
- .tip-display {
-     margin: 10px auto;
-     padding: 20px;
-     width: 90%;
-     max-width: 600px;
-     min-height: 60px;
-     border: 2px solid #3B82F6;
-     border-radius: 12px;
-     background-color: #EFF6FF;
-     text-align: center;
-     font-size: 16px;
-     font-weight: 500;
-     color: #1D4ED8;
-     transition: opacity 0.3s ease-in-out;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     line-height: 1.4;
- }
+/* Стиль для активного (обраного) настрою */
+.mood-option.active {
+    background-color: #E0F2FE;
+    box-shadow: 0 0 0 3px #3B82F6;
+}
 
- /* ПАГІНАЦІЯ */
- .pagination-dots {
-     position: absolute;
-     bottom: 20px;
-     left: 50%;
-     transform: translateX(-50%);
-     display: flex;
-     gap: 8px;
-     z-index: 10;
- }
+/* Стилі для відображення поради */
+.tip-display {
+    margin: 10px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    min-height: 60px;
+    border: 2px solid #3B82F6;
+    border-radius: 12px;
+    background-color: #EFF6FF;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #1D4ED8;
+    transition: opacity 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+}
 
- .dot {
-     width: 10px;
-     height: 10px;
-     border-radius: 50%;
-     background-color: rgba(0, 0, 0, 0.2);
-     transition: background-color 0.3s, transform 0.3s;
-     cursor: pointer;
- }
+/* ПАГІНАЦІЯ */
+.pagination-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
 
- .dot.active {
-     background-color: #3B82F6;
-     transform: scale(1.2);
- }
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #3B82F6;
+    transform: scale(1.2);
+}
+
+/* ================================================= */
+/* --- НОВІ СТИЛІ ДЛЯ СЕКЦІЇ КОЛЬОРІВ ТА МОДАЛЬНИХ ВІКОН --- */
+/* ================================================= */
+
+/* Контейнер для квадратів (забезпечує адаптивну сітку) */
+.color-grid {
+    display: grid;
+    /* 3 квадрати в ряд */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+    width: 100%;
+}
+
+/* Стилі для самих квадратів */
+.color-square {
+    /* Використовуємо властивість, щоб гарантувати квадратність */
+    padding-bottom: 100%;
+    height: 0;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.color-square:hover {
+    transform: scale(1.08);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Кольори */
+.color-red {
+    background-color: #E74C3C;
+}
+
+.color-blue {
+    background-color: #3498DB;
+}
+
+.color-yellow {
+    background-color: #F1C40F;
+}
+
+.color-green {
+    background-color: #2ECC71;
+}
+
+.color-purple {
+    background-color: #9B59B6;
+}
+
+.color-orange {
+    background-color: #E67E22;
+}
+
+
+/* --- СТИЛІ МОДАЛЬНИХ ВІКОН (Modal) --- */
+
+/* Контейнер модального вікна */
+.modal {
+    display: none;
+    /* Позиціонування відносно #mobile-frame */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Z-index має бути вищим, ніж Z-index будь-якого вмісту слайдера (наприклад, .pagination-dots: 10) */
+    z-index: 20;
+    overflow-y: auto;
+}
+
+/* Вміст модального вікна */
+.modal-content {
+    background-color: #FFFFFF;
+    /* Центрування, зменшуємо верхній відступ для мобільного вигляду */
+    margin: 20% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    position: relative;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    text-align: left;
+    color: #333;
+}
+
+.modal-content h3 {
+    color: #1E3A8A;
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.modal-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+/* Анімація появи */
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+/* Кнопка закриття */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #999;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #333;
+}

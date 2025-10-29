@@ -225,3 +225,29 @@ function initSlider() {
 
 // Запускаємо ініціалізацію після завантаження DOM
 window.onload = initSlider;
+
+
+
+
+
+
+    // Функція відкриття модального вікна
+    function openModal(color) {
+        document.getElementById('modal-' + color).style.display = 'block';
+    }
+
+    // Функція закриття модального вікна
+    function closeModal(color) {
+        document.getElementById('modal-' + color).style.display = 'none';
+    }
+
+    // Закриття модального вікна при кліку поза ним
+    window.onclick = function(event) {
+        // Отримуємо всі модальні вікна
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            if (event.target == modal) {
+        modal.style.display = 'none';
+            }
+        });
+    }
