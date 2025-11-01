@@ -250,3 +250,88 @@ window.onclick = function (event) {
         }
     });
 }
+
+
+
+
+
+
+const meditationData = {
+    forest: {
+        title: "🌳 Медитація Лісу: Шепіт Природи",
+        // Приклад відео: "Звуки лісу для сну та медитації"
+        // УВАГА: Використовуйте тільки id відео (після watch?v=)
+        youtubeId: "jfch6h7gE2I"
+    },
+    ocean: {
+        title: "🌊 Океанський Спокій: Хвилі",
+        // Приклад відео: "Звуки океану"
+        youtubeId: "E0D90rT-vX4"
+    },
+    rain: {
+        title: "🌧️ Звуки Дощу: Затишок та Релакс",
+        // Приклад відео: "Звуки дощу на даху"
+        youtubeId: "c_q-s2kM4fU"
+    },
+    flute: {
+        title: "🎶 Розслаблююча Флейта: Для Глибокого Сну",
+        // Приклад відео: "Розслаблююча музика"
+        youtubeId: "kL6S7B9qC4E"
+    }
+};
+
+const mediaModal = document.getElementById('media-modal');
+const mediaPlayer = document.getElementById('media-player');
+const mediaTitle = document.getElementById('media-title');
+
+/**
+ * Відкриває модальне вікно з медіаплеєром (YouTube iframe).
+ * @param {string} mood - Ключ медитації ('forest', 'ocean', і т.д.).
+ */
+function openMediaModal(mood) {
+    const data = meditationData[mood];
+
+    if (data) {
+        // 1. Оновлюємо заголовок
+        mediaTitle.textContent = data.title;
+
+        // 2. Вбудовуємо YouTube плеєр (iframe)
+        // Додаємо параметри для автозапуску (autoplay=1) та приховування елементів керування (controls=0)
+        mediaPlayer.innerHTML = `
+    < iframe
+src = "https://www.youtube.com/embed/${data.youtubeId}?autoplay=1&controls=0&mute=0&rel=0&loop=1&playlist=${data.youtubeId}"
+frameborder = "0"
+allow = "autoplay; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen >
+            </iframe >
+    `;
+
+        // 3. Показуємо модальне вікно
+        mediaModal.style.display = 'block';
+    }
+}
+
+/**
+ * Закриває модальне вікно та зупиняє відтворення відео, очищаючи iframe.
+ */
+function closeMediaModal() {
+    mediaModal.style.display = 'none';
+    // Зупиняємо відтворення, очищаючи вміст плеєра
+    mediaPlayer.innerHTML = '';
+}
+
+// Оновлення функції window.onclick для закриття нового модального вікна
+window.onclick = function (event) {
+    // Отримуємо всі модальні вікна (включно з 'media-modal')
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        if (event.target == modal) {
+            // Перевіряємо, чи це модальне вікно медіа
+            if (modal.id === 'media-modal') {
+                closeMediaModal();
+            } else {
+                modal.style.display = 'none';
+            }
+        }
+    });
+}

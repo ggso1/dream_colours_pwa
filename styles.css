@@ -107,11 +107,61 @@ body {
 }
 
 #slide-6 {
-    background-color: #FEE2E2;
-    /* Наприклад, світло-червоний */
-    color: #991B1B;
+    background-color: #8427ba;
     justify-content: center;
     padding-top: 20px;
+}
+
+.sendtg-btn {
+    background-color: #4F46E5;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.sendtg-btn:hover {
+    background-color: #4338CA;
+}
+
+.feedback-form {
+    margin-left: auto;
+    padding: 20px;
+    padding-right: 100px;
+    padding-left: 100px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.description_tg {
+    font-weight: bold;
+    display: block;
+    margin: 15px;
+    color: #333;
+}
+
+.textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+}
+
+
+.slide-card6 {
+    background-color: #daa9f7;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    margin-bottom: 20px;
+    padding: 20px;
+    animation: fadeIn 1s ease-out;
 }
 
 #slide-7 {
@@ -428,3 +478,97 @@ body {
     color: #333;
 }
 
+#slide-5 {
+    background-color: #E6F7F0;
+    /* Світло-зелений/бірюзовий для спокою */
+    color: #065F46;
+    justify-content: flex-start;
+    padding-top: 50px;
+}
+
+.slide-card--meditation {
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.slide-title--meditation {
+    font-size: 30px;
+    font-weight: 800;
+    color: #047857;
+    /* Темно-зелений */
+    margin-bottom: 0.5rem;
+}
+
+.meditation-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.meditation-option {
+    background-color: #E0F2F1;
+    /* Дуже світло-зелений */
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    border: 1px solid #99F6E4;
+}
+
+.meditation-option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: #CCFBF1;
+}
+
+.meditation-icon {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.meditation-option p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #065F46;
+}
+
+/* --- СТИЛІ МОДАЛЬНОГО ВІКНА МЕДІАПЛЕЄРА --- */
+
+.modal-content--media {
+    margin: 10% auto;
+    /* Трохи вище, ніж стандартне модальне вікно */
+    padding: 15px;
+    max-width: 95%;
+    width: 380px;
+}
+
+.modal-content--media h3 {
+    text-align: center;
+}
+
+.media-player-container {
+    position: relative;
+    /* Створює співвідношення сторін 16:9 для iframe */
+    padding-bottom: 56.25%;
+    /* 9 / 16 * 100 */
+    height: 0;
+    overflow: hidden;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+
+.media-player-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}

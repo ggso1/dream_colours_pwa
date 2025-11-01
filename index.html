@@ -129,42 +129,63 @@
                         </div>
                     </div>
 
-                    <!-- СЛАЙД 5 -->
+
                     <div id="slide-5" class="slide">
                         <div class="slide-card slide-card--meditation">
-                            <h2 class="slide-title slide-title--meditation">🧘‍♀️ Медитація</h2>
-                            <p class="slide-text">Знайдіть свій внутрішній спокій через кольорову медитацію.</p>
-                            <div class="meditation-timer">
-                                <button class="timer-button" onclick="startMeditation()">Почати медитацію</button>
-                                <div class="timer-display">5:00</div>
+                            <h2 class="slide-title slide-title--meditation">🎧 Звукові Світи Медитації</h2>
+                            <p class="slide-text">Оберіть свій пейзаж для заспокоєння та відновлення.</p>
+
+                            <div class="meditation-options-grid">
+                                <div class="meditation-option" onclick="openMediaModal('forest')">
+                                    <span class="meditation-icon">🌳</span>
+                                    <p>Медитація Лісу</p>
+                                </div>
+                                <div class="meditation-option" onclick="openMediaModal('ocean')">
+                                    <span class="meditation-icon">🌊</span>
+                                    <p>Океанський Спокій</p>
+                                </div>
+                                <div class="meditation-option" onclick="openMediaModal('rain')">
+                                    <span class="meditation-icon">🌧️</span>
+                                    <p>Звуки Дощу</p>
+                                </div>
+                                <div class="meditation-option" onclick="openMediaModal('flute')">
+                                    <span class="meditation-icon">🎶</span>
+                                    <p>Розслаблююча Флейта</p>
+                                </div>
                             </div>
                         </div>
+
                         <div class="slide-hint">
                             <p>Свайпніть вліво &rarr;</p>
                         </div>
                     </div>
 
+
+
                     <!-- СЛАЙД 6 -->
                     <div id="slide-6" class="slide">
-                        <div class="slide-card slide-card--journal">
-                            <h2 class="slide-title slide-title--journal">📔 Щоденник Кольорів</h2>
-                            <p class="slide-text">Записуйте свої відчуття та емоції, пов'язані з кольорами.</p>
-                            <div class="journal-entry">
-                                <textarea placeholder="Які кольори ви помітили сьогодні?"
-                                    class="journal-textarea"></textarea>
-                                <button class="save-button" onclick="saveJournalEntry()">Зберегти</button>
-                            </div>
+                        <div class="slide-card6 slide-card--journal">
+                            <h2 class="slide-title slide-title--journal">Щоденник Кольорів</h2>
+                            <form id="feedback-form">
+                                <label class="description_tg" for="feedback">Поділіться своїм настроєм і кольором, що
+                                    його передає:</label>
+                                <textarea id="feedback" name="feedback" class="textarea" placeholder="" rows="5"
+                                    required></textarea>
+                                <button type="submit" class="sendtg-btn">Надіслати</button>
+                            </form>
+                            <p id="feedback-sent" class="hidden">Успішно надіслано!</p>
+                            <p class="tgsulka">Наша група - <a href="https://t.me/+BYX5H_16yYY4NmRi"
+                                    target="_blank">https://t.me/+BYX5H_16yYY4NmRi</a></p>
                         </div>
-                        <div class="slide-hint">
-                            <p>Свайпніть вліво &rarr;</p>
-                        </div>
+
                     </div>
 
                     <!-- СЛАЙД 7 -->
                     <div id="slide-7" class="slide">
                         <div class="slide-card slide-card--finish">
                             <h2 class="slide-title slide-title--finish">🌈 Дякуємо!</h2>
-                            <p class="slide-text">Ви пройшли всю кольорову подорож. Нехай ваш світ буде яскравим!</p>
+                            <p class="slide-text">Ви пройшли всю кольорову подорож. Нехай ваш світ буде яскравим!
+                            </p>
                         </div>
                         <div class="slide-hint">
                             <p>Почати спочатку ↺</p>
@@ -175,6 +196,15 @@
         </div>
     </div>
 
+
+    <!-- Медіа Модальне вікно -->
+    <div id="mediaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeMediaModal()">&times;</span>
+            <h3 id="media-title"></h3>
+            <div id="media-player"></div>
+        </div>
+    </div>
 
     <div id="pagination" class="pagination-dots">
         <span id="dot-0" class="dot active"></span>
@@ -188,8 +218,9 @@
     </div>
     </div>
     </div>
-
+    <script src="tg.js"></script>
     <script src="app.js"></script>
+
 </body>
 
 </html>
