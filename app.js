@@ -1,4 +1,3 @@
-
 // Об'єкт зі зборами порад для різних настроїв
 const moodTips = {
     sad: "❤️ Порада для Суму: Дозвольте собі сумувати, але потім зробіть маленьку, приємну для вас справу (випийте какао, подивіться улюблений фільм).",
@@ -48,7 +47,8 @@ const slides = Array.from(slider.children);
 const maxPage = slides.length - 1; // Максимальний індекс сторінки (2)
 
 // Отримуємо індикатори
-const dots = Array.from(document.getElementById('pagination').children);
+const paginationContainer = document.getElementById('pagination');
+const dots = paginationContainer ? Array.from(paginationContainer.children) : []; // Перевірка на null
 const SWIPE_THRESHOLD = 80; // Мінімальна відстань для успішного свайпу (пікселів)
 
 let currentPage = 0;
@@ -103,6 +103,8 @@ function handleStart(event) {
     }
 
     isDragging = true;
+    getSlideWidth(); // 👈 ВИПРАВЛЕННЯ: Гарантуємо, що slideWidth встановлена
+
     // Визначаємо початкову позицію X
     startX = event.touches ? event.touches[0].clientX : event.clientX;
     // Вимикаємо CSS-анімацію під час перетягування
@@ -226,34 +228,15 @@ function initSlider() {
 window.onload = initSlider;
 
 
-
-
-
-
 // Функція відкриття модального вікна
 function openModal(color) {
-    document.getElementById('modal-' + color).style.display = 'block';
+    document.getElementById('modal-' + color).style.display = 'flex'; // Змінено на 'flex' для центрування
 }
 
 // Функція закриття модального вікна
 function closeModal(color) {
     document.getElementById('modal-' + color).style.display = 'none';
 }
-
-// Закриття модального вікна при кліку поза ним
-window.onclick = function (event) {
-    // Отримуємо всі модальні вікна
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    });
-}
-
-
-
-
 
 
 const meditationData = {
@@ -302,7 +285,7 @@ function openMediaModal(mood) {
         `;
 
         // 3. Показуємо модальне вікно
-        mediaModal.style.display = 'block';
+        mediaModal.style.display = 'flex'; // Змінено на 'flex' для центрування
     }
 }
 
@@ -315,9 +298,9 @@ function closeMediaModal() {
     mediaPlayer.innerHTML = '';
 }
 
-// Оновлення функції window.onclick для закриття нового модального вікна
+// 👈 ВИПРАВЛЕННЯ: Злита функція window.onclick (залишаємо тільки цей варіант)
 window.onclick = function (event) {
-    // Отримуємо всі модальні вікна (включно з 'media-modal')
+    // Отримуємо всі модальні вікна
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {
         if (event.target == modal) {

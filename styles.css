@@ -1,4 +1,3 @@
-
 body {
     font-family: 'Inter', sans-serif;
     background-color: #F8F8F8;
@@ -59,12 +58,42 @@ body {
     padding: 20px;
 }
 
+.slide-card {
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    margin-bottom: 20px;
+    padding: 20px;
+    animation: fadeIn 1s ease-out;
+}
+
 /* slide1 */
 #slide-1 {
     background-color: #FBC02D;
 }
+
 .slide-card--sun {
-    background-color:#FFF9C4 ;
+    background-color: #FFF9C4;
+}
+
+.slide-title--sun {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #d97706;
+    font-family: "Merriweather", serif;
+}
+
+.slide-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #92400e;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.slide-hint {
+    color: #FFF9C4;
+    font-size: 20px;
+    font-family: "Lobster", sans-serif;
 }
 
 /* slide2 */
@@ -108,13 +137,61 @@ body {
     align-items: center;
     justify-content: center;
     line-height: 1.4;
+    font-family: "Ubuntu", sans-serif;
+}
+
+
+.mood-option {
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 5px;
+    border-radius: 8px;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    flex: 1;
+    max-width: 100px;
+}
+
+.mood-option:hover {
+    background-color: #F3F4F6;
+    transform: scale(1.05);
+}
+
+.emoji {
+    font-size: 40px;
+    display: block;
+    line-height: 1;
+}
+
+.mood-label {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4B5563;
+}
+
+.mood-option.active {
+    background-color: #E0F2FE;
+    box-shadow: 0 0 0 3px #3B82F6;
+}
+
+
+.slide-title--mood {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1E3A8A;
+    font-family: "Merriweather", serif;
+}
+
+.slide-text-mood {
+    font-size: 18px;
+    font-weight: 500;
+    color: #192853;
+    font-family: "Ubuntu", sans-serif;
 }
 
 /* slide3 */
 #slide-3 {
     background-color: #00695C;
-    justify-content: flex-start;
-    padding-top: 50px;
 }
 
 .slide-card--colors {
@@ -126,14 +203,9 @@ body {
     color: #053820;
 }
 
-/* ================================================= */
-/* --- НОВІ СТИЛІ ДЛЯ СЕКЦІЇ КОЛЬОРІВ ТА МОДАЛЬНИХ ВІКОН --- */
-/* ================================================= */
-
-/* Контейнер для квадратів (забезпечує адаптивну сітку) */
+/* Сітка кольорових квадратів */
 .color-grid {
     display: grid;
-    /* 3 квадрати в ряд */
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     margin-top: 25px;
@@ -142,7 +214,6 @@ body {
 
 /* Стилі для самих квадратів */
 .color-square {
-    /* Використовуємо властивість, щоб гарантувати квадратність */
     padding-bottom: 100%;
     height: 0;
     cursor: pointer;
@@ -181,29 +252,10 @@ body {
     background-color: #E67E22;
 }
 
-
-/* --- СТИЛІ МОДАЛЬНИХ ВІКОН (Modal) --- */
-
-/* Контейнер модального вікна */
-.modal {
-    display: none;
-    /* Позиціонування відносно #mobile-frame */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    /* Z-index має бути вищим, ніж Z-index будь-якого вмісту слайдера (наприклад, .pagination-dots: 10) */
-    z-index: 20;
-    overflow-y: auto;
-}
-
-/* Вміст модального вікна */
-.modal-content {
+.modal-content-color {
+    /* Наслідуємо вигляд і розміри від .modal-content для консистентності */
     background-color: #FFFFFF;
-    /* Центрування, зменшуємо верхній відступ для мобільного вигляду */
-    margin: 20% auto;
+    /* Білий фон (як просили) */
     padding: 25px;
     border-radius: 12px;
     width: 90%;
@@ -214,87 +266,17 @@ body {
     animation-duration: 0.4s;
     text-align: left;
     color: #333;
+    /* Це критично для центрування у Flex-контейнері, навіть якщо батько має align-items: center */
+    margin: auto;
 }
-
-.modal-content h3 {
-    color: #1E3A8A;
-    margin-top: 0;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.modal-content p {
-    font-size: 16px;
-    line-height: 1.5;
-    font-weight: 400;
-}
-
-/* Анімація появи */
-@keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0
-    }
-
-    to {
-        top: 0;
-        opacity: 1
-    }
-}
-
-/* Кнопка закриття */
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    color: #999;
-    font-size: 30px;
-    font-weight: bold;
-    cursor: pointer;
-    line-height: 1;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: #333;
+.modal-content-color {
+    background-color: #FFFFFF;
+    /* Задаємо білий фон */
+    margin: auto;
+    /* Додаємо margin: auto для ідеального центрування та сумісності з анімацією */
 }
 
 
-
-
-/* --- СТИЛІ МОДАЛЬНОГО ВІКНА МЕДІАПЛЕЄРА --- */
-
-.modal-content--media {
-    margin: 10% auto;
-    /* Трохи вище, ніж стандартне модальне вікно */
-    padding: 15px;
-    max-width: 95%;
-    width: 380px;
-}
-
-.modal-content--media h3 {
-    text-align: center;
-}
-
-.media-player-container {
-    position: relative;
-    /* Створює співвідношення сторін 16:9 для iframe */
-    padding-bottom: 56.25%;
-    /* 9 / 16 * 100 */
-    height: 0;
-    overflow: hidden;
-    margin-top: 15px;
-    border-radius: 8px;
-}
-
-.media-player-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
 
 /* slide4 */
 #slide-4 {
@@ -348,6 +330,66 @@ body {
     font-size: 14px;
     font-weight: 600;
     color: #04120e;
+}
+
+.modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 20;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modal-content {
+    background-color: #FFFFFF;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    position: relative;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    text-align: left;
+    color: #333;
+    /* Додайте margin: auto; щоб забезпечити правильне центрування у flex-контейнері,
+       особливо з урахуванням анімації animatetop. */
+    margin: auto;
+}
+
+.modal-content h3 {
+    color: #1E3A8A;
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.modal-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+/* Анімація появи */
+@keyframes animatetop {
+    from {
+        transform: translateY(-300px);
+        /* Використовуємо transform для старту анімації */
+        opacity: 0
+    }
+
+    to {
+        transform: translateY(0);
+        /* Залишаємо його в центрі, де його розмістив Flexbox */
+        opacity: 1
+    }
 }
 
 /* slide5 */
@@ -409,105 +451,6 @@ body {
 }
 
 
-
-
-.slide-card {
-    border-radius: 1.5rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    margin-bottom: 20px;
-    padding: 20px;
-    animation: fadeIn 1s ease-out;
-}
-
-
-
-.slide-title--sun {
-    font-size: 55px;
-    margin-bottom: 0.75rem;
-    color: #d97706;
-}
-
-
-
-.slide-title--mood {
-    font-size: 32px;
-    font-weight: 800;
-    color: #1E3A8A;
-}
-
-
-
-/* ЗАГАЛЬНІ СТИЛІ КАРТОК/ТЕКСТУ */
-.slide-title {
-    font-weight: 900;
-    letter-spacing: -0.05em;
-    margin: 0;
-    padding: 0;
-}
-
-.slide-text {
-    font-size: 1.125rem;
-    font-weight: 500;
-    margin-top: 10px;
-}
-
-.slide-text--nature,
-.slide-text--colors {
-    font-size: 1.25rem;
-    font-weight: 300;
-    line-height: 1.625;
-}
-
-.slide-hint {
-    margin-top: 2rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #92400e;
-}
-
-.slide-hint--blue {
-    color: #1E3A8A;
-    opacity: 0.7;
-}
-
-
-
-.mood-option {
-    text-align: center;
-    cursor: pointer;
-    padding: 10px 5px;
-    border-radius: 8px;
-    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    flex: 1;
-    max-width: 100px;
-}
-
-.mood-option:hover {
-    background-color: #F3F4F6;
-    transform: scale(1.05);
-}
-
-.emoji {
-    font-size: 40px;
-    display: block;
-    line-height: 1;
-}
-
-.mood-label {
-    margin-top: 5px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #4B5563;
-}
-
-/* Стиль для активного (обраного) настрою */
-.mood-option.active {
-    background-color: #E0F2FE;
-    box-shadow: 0 0 0 3px #3B82F6;
-}
-
-
 /* ПАГІНАЦІЯ */
 .pagination-dots {
     position: absolute;
@@ -533,3 +476,19 @@ body {
     transform: scale(1.2);
 }
 
+/* кнопка закриття */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #999;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #333;
+}

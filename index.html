@@ -8,6 +8,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="theme-color" content="#2196F3">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
     <title>Подорож відчуттів</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json" />
@@ -19,7 +24,7 @@
             <div id="app" class="app-inner-wrapper">
 
                 <div id="slider">
-                     <!-- СЛАЙД 1: КОЛЬОРИ МРІЇ -->
+                    <!-- СЛАЙД 1: КОЛЬОРИ МРІЇ -->
                     <div id="slide-1" class="slide">
                         <div class="slide-card slide-card--sun">
                             <h1 class="slide-title slide-title--sun">Кольори Моєї Мрії</h1>
@@ -35,7 +40,7 @@
                     <div id="slide-2" class="slide">
                         <div class="slide-card slide-card--mood">
                             <h2 class="slide-title slide-title--mood">Обери свій Настрій</h2>
-                            <p class="slide-text">Яку пораду ти шукаєш сьогодні?</p>
+                            <p class="slide-text-mood">Яку пораду ти шукаєш сьогодні?</p>
                         </div>
 
                         <div class="mood-selector-section">
@@ -89,23 +94,6 @@
                         </div>
                     </div>
 
-
-                    <div id="modal-red" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn" onclick="closeModal('red')">&times;</span>
-                            <h3>🔴 Червоний: Пристрасть та Енергія</h3>
-                            <p>Це колір **пристрасті**, **енергії** та **гострого збудження**...</p>
-                        </div>
-                    </div>
-
-                    <div id="modal-blue" class="modal">
-                        <div class="modal-content">
-                            <span class="close-btn" onclick="closeModal('blue')">&times;</span>
-                            <h3>🔵 Синій: Спокій та Сумнів</h3>
-                            <p>Це колір **спокою**, **сумнівів** та **глибоких роздумів**...</p>
-                        </div>
-                    </div>
-
                     <!-- СЛАЙД 4: МЕДИТАЦІЯ -->
                     <div id="slide-4" class="slide">
                         <div class="slide-card slide-card--meditation">
@@ -148,7 +136,7 @@
                             </form>
                             <p id="feedback-sent" class="hidden">Успішно надіслано!</p>
                             <p class="tgsulka">Наша група - <a href="https://t.me/+BYX5H_16yYY4NmRi"
-                                    target="_blank">https://t.me/+BYX5H_16yYY4NmRi</a></p>
+                                    target="_blank">https://t.me/+gvSeKyx1Fy40Mjky</a></p>
                         </div>
 
                     </div>
@@ -164,30 +152,43 @@
                             <p>Почати спочатку ↺</p>
                         </div>
                     </div>
+                    <div id="modal-red" class="modal">
+                        <div class="modal-content-color">
+                            <span class="close-btn" onclick="closeModal('red')">&times;</span>
+                            <h3>🔴 Червоний: Пристрасть та Енергія</h3>
+                            <p>Це колір **пристрасті**, **енергії** та **гострого збудження**...</p>
+                        </div>
+                    </div>
+
+                    <div id="modal-blue" class="modal">
+                        <div class="modal-content-color">
+                            <span class="close-btn" onclick="closeModal('blue')">&times;</span>
+                            <h3>🔵 Синій: Спокій та Сумнів</h3>
+                            <p>Це колір **спокою**, **сумнівів** та **глибоких роздумів**...</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-
-    <!-- Медіа Модальне вікно -->
-    <div id="mediaModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeMediaModal()">&times;</span>
-            <h3 id="media-title"></h3>
-            <div id="media-player"></div>
+        <!-- Медіа Модальне вікно -->
+        <div id="mediaModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeMediaModal()">&times;</span>
+                <h3 id="media-title"></h3>
+                <div id="media-player"></div>
+            </div>
         </div>
-    </div>
 
-    <div id="pagination" class="pagination-dots">
-        <span id="dot-0" class="dot active"></span>
-        <span id="dot-1" class="dot"></span>
-        <span id="dot-2" class="dot"></span>
-        <span id="dot-3" class="dot"></span>
-        <span id="dot-4" class="dot"></span>
-        <span id="dot-5" class="dot"></span>
-        <span id="dot-6" class="dot"></span>
-    </div>
+        <div id="pagination" class="pagination-dots">
+            <span id="dot-0" class="dot active"></span>
+            <span id="dot-1" class="dot"></span>
+            <span id="dot-2" class="dot"></span>
+            <span id="dot-3" class="dot"></span>
+            <span id="dot-4" class="dot"></span>
+            <span id="dot-5" class="dot"></span>
+            <span id="dot-6" class="dot"></span>
+        </div>
     </div>
     </div>
     </div>
