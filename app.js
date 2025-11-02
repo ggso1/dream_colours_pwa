@@ -280,7 +280,7 @@ const meditationData = {
     }
 };
 
-const mediaModal = document.getElementById('media-modal');
+const mediaModal = document.getElementById('mediaModal');
 const mediaPlayer = document.getElementById('media-player');
 const mediaTitle = document.getElementById('media-title');
 
@@ -298,13 +298,8 @@ function openMediaModal(mood) {
         // 2. Вбудовуємо YouTube плеєр (iframe)
         // Додаємо параметри для автозапуску (autoplay=1) та приховування елементів керування (controls=0)
         mediaPlayer.innerHTML = `
-    < iframe
-src = "https://www.youtube.com/embed/${data.youtubeId}?autoplay=1&controls=0&mute=0&rel=0&loop=1&playlist=${data.youtubeId}"
-frameborder = "0"
-allow = "autoplay; encrypted-media; gyroscope; picture-in-picture"
-allowfullscreen >
-            </iframe >
-    `;
+            <iframe src="https://www.youtube.com/embed/${data.youtubeId}?autoplay=1&controls=0&mute=0&rel=0&loop=1&playlist=${data.youtubeId}" frameborder="0" allow="autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        `;
 
         // 3. Показуємо модальне вікно
         mediaModal.style.display = 'block';
@@ -327,7 +322,7 @@ window.onclick = function (event) {
     modals.forEach(modal => {
         if (event.target == modal) {
             // Перевіряємо, чи це модальне вікно медіа
-            if (modal.id === 'media-modal') {
+            if (modal.id === 'mediaModal') {
                 closeMediaModal();
             } else {
                 modal.style.display = 'none';

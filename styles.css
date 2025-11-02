@@ -1,8 +1,6 @@
-/* ГЛОБАЛЬНІ СТИЛІ */
+
 body {
     font-family: 'Inter', sans-serif;
-    /* Видаляємо overflow: hidden; з body, оскільки модальні вікна повинні
-       бути видимі, але залишаємо його для #mobile-frame */
     background-color: #F8F8F8;
     height: 100vh;
     touch-action: manipulation;
@@ -12,7 +10,6 @@ body {
     margin: 0;
 }
 
-/* Контейнер для центрування всього контенту */
 .app-container {
     width: 100%;
     height: 100vh;
@@ -26,7 +23,6 @@ body {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
-    /* Приховуємо горизонтальний скролбар контейнера слайдера */
 }
 
 #mobile-frame {
@@ -39,13 +35,11 @@ body {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
     position: relative;
     overflow: hidden;
-    /* Залишаємо прихованим, щоб слайдер не виходив за межі */
 }
 
 /* СЛАЙДЕР */
 #slider {
-    width: 700%;
-    /* Сім слайдів по 100% */
+    width: 600%;
     height: 100%;
     display: flex;
     transition: transform 0.5s ease-in-out;
@@ -54,8 +48,7 @@ body {
 .slide {
     height: 100%;
     flex-shrink: 0;
-    width: calc(100% / 7);
-    /* Кожен слайд займає 1/7 ширини контейнера */
+    width: calc(100% / 6);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,242 +57,39 @@ body {
     user-select: none;
     box-sizing: border-box;
     padding: 20px;
-    overflow-y: auto;
-    /* Додаємо overflow-y: auto; для прокручування контенту слайда,
-       якщо він більший за висоту фрейму */
 }
 
+/* slide1 */
 #slide-1 {
-    background-color: #FCD34D;
-    color: #374151;
+    background-color: #FBC02D;
 }
-
-#slide-2 {
-    background-color: #DBEAFE;
-    color: #1E3A8A;
-    justify-content: flex-start;
-    padding-top: 50px;
-}
-
-/* Зміна кольору тла на нейтральний, щоб кольорові квадрати були помітнішими */
-#slide-3 {
-    background-color: #059669;
-    color: #FFFFFF;
-    justify-content: flex-start;
-    /* Вирівнювання контенту на початок */
-    padding-top: 50px;
-}
-
-#slide-4 {
-    background-color: #FEE2E2;
-    /* Наприклад, світло-червоний */
-    color: #991B1B;
-    justify-content: center;
-    padding-top: 20px;
-}
-
-#slide-5 {
-    background-color: #FEE2E2;
-    /* Наприклад, світло-червоний */
-    color: #991B1B;
-    justify-content: center;
-    padding-top: 20px;
-}
-
-#slide-6 {
-    background-color: #8427ba;
-    justify-content: center;
-    padding-top: 20px;
-}
-
-.sendtg-btn {
-    background-color: #4F46E5;
-    color: white;
-    border: none;
-    border-radius: 0.375rem;
-    padding: 12px 16px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.sendtg-btn:hover {
-    background-color: #4338CA;
-}
-
-.feedback-form {
-    margin-left: auto;
-    padding: 20px;
-    padding-right: 100px;
-    padding-left: 100px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.description_tg {
-    font-weight: bold;
-    display: block;
-    margin: 15px;
-    color: #333;
-}
-
-.textarea {
-    width: 90%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: none;
-}
-
-
-.slide-card6 {
-    background-color: #daa9f7;
-    border-radius: 1.5rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    margin-bottom: 20px;
-    padding: 20px;
-    animation: fadeIn 1s ease-out;
-}
-
-#slide-7 {
-    background-color: #FEE2E2;
-    /* Наприклад, світло-червоний */
-    color: #991B1B;
-    justify-content: center;
-    padding-top: 20px;
-}
-
-.slide-card {
-    border-radius: 1.5rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    margin-bottom: 20px;
-    padding: 20px;
-    animation: fadeIn 1s ease-out;
-}
-
-/* СТИЛІ СЛАЙДА 1 (SUN) */
 .slide-card--sun {
-    background-color: rgb(255 255 255 / 0.9);
+    background-color:#FFF9C4 ;
 }
 
-.slide-title--sun {
-    font-size: 55px;
-    margin-bottom: 0.75rem;
-    color: #d97706;
+/* slide2 */
+#slide-2 {
+    background-color: #0277BD;
+    justify-content: flex-start;
+    padding-top: 50px;
 }
 
-/* СТИЛІ СЛАЙДА 2 (MOOD) */
 .slide-card--mood {
-    background-color: #FFFFFF;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #81D4FA;
 }
 
-.slide-title--mood {
-    font-size: 32px;
-    font-weight: 800;
-    color: #1E3A8A;
-}
-
-/* СТИЛІ СЛАЙДА 3 (NATURE - ЗАСТАРІЛИЙ) ТА КОЛЬОРІВ (НОВИЙ) */
-.slide-card--nature,
-.slide-card--colors {
-    background-color: rgb(20 83 45 / 0.8);
-    color: #FFFFFF;
-    /* Додано відступи для секції кольорів */
-    padding: 30px 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.slide-title--nature,
-.slide-title--colors {
-    color: #a7f3d0;
-}
-
-/* ЗАГАЛЬНІ СТИЛІ КАРТОК/ТЕКСТУ */
-.slide-title {
-    font-weight: 900;
-    letter-spacing: -0.05em;
-    margin: 0;
-    padding: 0;
-}
-
-.slide-text {
-    font-size: 1.125rem;
-    font-weight: 500;
-    margin-top: 10px;
-}
-
-.slide-text--nature,
-.slide-text--colors {
-    font-size: 1.25rem;
-    font-weight: 300;
-    line-height: 1.625;
-}
-
-.slide-hint {
-    margin-top: 2rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #92400e;
-}
-
-.slide-hint--blue {
-    color: #1E3A8A;
-    opacity: 0.7;
-}
-
-/* СТИЛІ ДЛЯ СЕКЦІЇ НАСТРОЇВ (MOOD SELECTOR) */
 .mood-selector-section {
     display: flex;
     justify-content: center;
     gap: 20px;
     width: 90%;
     margin: 20px auto;
-    background-color: #FFFFFF;
+    background-color: #81D4FA;
     padding: 15px 10px;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.mood-option {
-    text-align: center;
-    cursor: pointer;
-    padding: 10px 5px;
-    border-radius: 8px;
-    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    flex: 1;
-    max-width: 100px;
-}
-
-.mood-option:hover {
-    background-color: #F3F4F6;
-    transform: scale(1.05);
-}
-
-.emoji {
-    font-size: 40px;
-    display: block;
-    line-height: 1;
-}
-
-.mood-label {
-    margin-top: 5px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #4B5563;
-}
-
-/* Стиль для активного (обраного) настрою */
-.mood-option.active {
-    background-color: #E0F2FE;
-    box-shadow: 0 0 0 3px #3B82F6;
-}
-
-/* Стилі для відображення поради */
 .tip-display {
     margin: 10px auto;
     padding: 20px;
@@ -308,7 +98,7 @@ body {
     min-height: 60px;
     border: 2px solid #3B82F6;
     border-radius: 12px;
-    background-color: #EFF6FF;
+    background-color: #81D4FA;
     text-align: center;
     font-size: 16px;
     font-weight: 500;
@@ -320,29 +110,20 @@ body {
     line-height: 1.4;
 }
 
-/* ПАГІНАЦІЯ */
-.pagination-dots {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 10;
+/* slide3 */
+#slide-3 {
+    background-color: #00695C;
+    justify-content: flex-start;
+    padding-top: 50px;
 }
 
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, transform 0.3s;
-    cursor: pointer;
+.slide-card--colors {
+    background-color: #A7FFEB;
 }
 
-.dot.active {
-    background-color: #3B82F6;
-    transform: scale(1.2);
+
+.slide-title--colors {
+    color: #053820;
 }
 
 /* ================================================= */
@@ -478,66 +259,8 @@ body {
     color: #333;
 }
 
-#slide-5 {
-    background-color: #E6F7F0;
-    /* Світло-зелений/бірюзовий для спокою */
-    color: #065F46;
-    justify-content: flex-start;
-    padding-top: 50px;
-}
 
-.slide-card--meditation {
-    background-color: #FFFFFF;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
 
-.slide-title--meditation {
-    font-size: 30px;
-    font-weight: 800;
-    color: #047857;
-    /* Темно-зелений */
-    margin-bottom: 0.5rem;
-}
-
-.meditation-options-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 25px;
-    width: 100%;
-}
-
-.meditation-option {
-    background-color: #E0F2F1;
-    /* Дуже світло-зелений */
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    text-align: center;
-    border: 1px solid #99F6E4;
-}
-
-.meditation-option:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    background-color: #CCFBF1;
-}
-
-.meditation-icon {
-    font-size: 40px;
-    display: block;
-    margin-bottom: 5px;
-    line-height: 1;
-}
-
-.meditation-option p {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: #065F46;
-}
 
 /* --- СТИЛІ МОДАЛЬНОГО ВІКНА МЕДІАПЛЕЄРА --- */
 
@@ -572,3 +295,241 @@ body {
     height: 100%;
     border: none;
 }
+
+/* slide4 */
+#slide-4 {
+    background-color: #5E35B1;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.slide-card--meditation {
+    background-color: #D6BCF0;
+}
+
+.slide-title--meditation {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.meditation-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.meditation-option {
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: center;
+    background-color: #efefef;
+    border: 1px solid #99F6E4;
+}
+
+.meditation-option:hover {
+    transform: translateY(-3px);
+    background-color: #CCFBF1;
+}
+
+.meditation-icon {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.meditation-option p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #04120e;
+}
+
+/* slide5 */
+
+#slide-5 {
+    background-color: #FF6D00;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.slide-card5 {
+    background-color: #FFCC80;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.sendtg-btn {
+    background-color: #4F46E5;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.sendtg-btn:hover {
+    background-color: #4338CA;
+}
+
+.feedback-form {
+    margin-left: auto;
+    padding: 20px;
+    padding-right: 100px;
+    padding-left: 100px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.description_tg {
+    font-weight: bold;
+    display: block;
+    margin: 15px;
+    color: #333;
+}
+
+.textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+}
+
+
+
+
+.slide-card {
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    margin-bottom: 20px;
+    padding: 20px;
+    animation: fadeIn 1s ease-out;
+}
+
+
+
+.slide-title--sun {
+    font-size: 55px;
+    margin-bottom: 0.75rem;
+    color: #d97706;
+}
+
+
+
+.slide-title--mood {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1E3A8A;
+}
+
+
+
+/* ЗАГАЛЬНІ СТИЛІ КАРТОК/ТЕКСТУ */
+.slide-title {
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    margin: 0;
+    padding: 0;
+}
+
+.slide-text {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.slide-text--nature,
+.slide-text--colors {
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.625;
+}
+
+.slide-hint {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #92400e;
+}
+
+.slide-hint--blue {
+    color: #1E3A8A;
+    opacity: 0.7;
+}
+
+
+
+.mood-option {
+    text-align: center;
+    cursor: pointer;
+    padding: 10px 5px;
+    border-radius: 8px;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    flex: 1;
+    max-width: 100px;
+}
+
+.mood-option:hover {
+    background-color: #F3F4F6;
+    transform: scale(1.05);
+}
+
+.emoji {
+    font-size: 40px;
+    display: block;
+    line-height: 1;
+}
+
+.mood-label {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4B5563;
+}
+
+/* Стиль для активного (обраного) настрою */
+.mood-option.active {
+    background-color: #E0F2FE;
+    box-shadow: 0 0 0 3px #3B82F6;
+}
+
+
+/* ПАГІНАЦІЯ */
+.pagination-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #3B82F6;
+    transform: scale(1.2);
+}
+
