@@ -38,7 +38,7 @@ body {
 
 /* СЛАЙДЕР */
 #slider {
-    width: 600%;
+    width: 500%;
     height: 100%;
     display: flex;
     transition: transform 0.5s ease-in-out;
@@ -47,7 +47,7 @@ body {
 .slide {
     height: 100%;
     flex-shrink: 0;
-    width: calc(100% / 6);
+    width: calc(100% / 5);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -252,30 +252,6 @@ body {
     background-color: #E67E22;
 }
 
-.modal-content-color {
-    /* Наслідуємо вигляд і розміри від .modal-content для консистентності */
-    background-color: #FFFFFF;
-    /* Білий фон (як просили) */
-    padding: 25px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 350px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-    position: relative;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-    text-align: left;
-    color: #333;
-    /* Це критично для центрування у Flex-контейнері, навіть якщо батько має align-items: center */
-    margin: auto;
-}
-.modal-content-color {
-    background-color: #FFFFFF;
-    /* Задаємо білий фон */
-    margin: auto;
-    /* Додаємо margin: auto для ідеального центрування та сумісності з анімацією */
-}
-
 
 
 /* slide4 */
@@ -380,14 +356,12 @@ body {
 /* Анімація появи */
 @keyframes animatetop {
     from {
-        transform: translateY(-300px);
-        /* Використовуємо transform для старту анімації */
+        top: -300px;
         opacity: 0
     }
 
     to {
-        transform: translateY(0);
-        /* Залишаємо його в центрі, де його розмістив Flexbox */
+        top: 0;
         opacity: 1
     }
 }

@@ -41,10 +41,8 @@ function showMoodTip(element) {
 // JAVАСRIPТ ЛОГІКА СЛАЙДЕРА
 // =======================================================
 
-// Ініціалізація змінних
-const slider = document.getElementById('slider');
-const slides = Array.from(slider.children);
-const maxPage = slides.length - 1; // Максимальний індекс сторінки (2)
+const slides = Array.from(document.querySelectorAll('#slider > .slide'));
+const maxPage = slides.length - 1;
 
 // Отримуємо індикатори
 const paginationContainer = document.getElementById('pagination');
@@ -120,9 +118,6 @@ function handleStart(event) {
     }
 }
 
-/**
- * Обробник переміщення (миша або дотик).
- */
 function handleMove(event) {
     if (!isDragging) return;
 
@@ -133,29 +128,21 @@ function handleMove(event) {
 
     const maxTranslate = -maxPage * slideWidth;
 
-    // Розрахунок нового зміщення
+    // 🚫 Блокуємо рух, якщо користувач на останньому слайді і тягне вліво
+    if (currentPage === maxPage && diffX < 0) return;
+
+    // 🚫 Блокуємо рух, якщо користувач на першому слайді і тягне вправо
+    if (currentPage === 0 && diffX > 0) return;
+
     let newTranslate = currentTranslate + diffX;
-
-    // Обмеження, щоб слайдер не виходив за межі
-    if (newTranslate > 0) {
-        // Перша сторінка - пружний ефект
-        newTranslate = diffX * 0.2;
-    } else if (newTranslate < maxTranslate) {
-        // Остання сторінка - жорстке обмеження
-        newTranslate = maxTranslate;
-    }
-
     slider.style.transform = `translateX(${newTranslate}px)`;
 
-    // Запобігаємо стандартному вертикальному скролу
     if (event.touches && Math.abs(diffX) > 10) {
         event.preventDefault();
     }
 }
 
-/**
- * Обробник закінчення взаємодії (миша або дотик).
- */
+
 function handleEnd(event) {
     if (!isDragging) return;
     isDragging = false;
@@ -224,8 +211,11 @@ function initSlider() {
     snapToPage(false);
 }
 
+
+
 // Запускаємо ініціалізацію після завантаження DOM
 window.onload = initSlider;
+
 
 
 // Функція відкриття модального вікна
