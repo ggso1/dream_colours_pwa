@@ -37,9 +37,9 @@ function showMoodTip(element) {
     }
 }
 
-// =======================================================
-// JAVАСRIPТ ЛОГІКА СЛАЙДЕРА
-// =======================================================
+
+// ЛОГІКА СЛАЙДЕРА
+
 
 const slides = Array.from(document.querySelectorAll('#slider > .slide'));
 const maxPage = slides.length - 1;
@@ -128,10 +128,9 @@ function handleMove(event) {
 
     const maxTranslate = -maxPage * slideWidth;
 
-    // 🚫 Блокуємо рух, якщо користувач на останньому слайді і тягне вліво
+
     if (currentPage === maxPage && diffX < 0) return;
 
-    // 🚫 Блокуємо рух, якщо користувач на першому слайді і тягне вправо
     if (currentPage === 0 && diffX > 0) return;
 
     let newTranslate = currentTranslate + diffX;

@@ -1,13 +1,13 @@
-const CACHE_NAME = 'dream-colours-v1';
-const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/app.js',
-    '/drawing.js',
-    '/manifest.json',
-    '/favicon.ico'
+const CACHE_NAME = 'pwa-cache-v1';
+const FILES_TO_CACHE = [
+  '/',
+  '/index.html',
+  '/styles.css',
+  '/app.js',
+  '/manifest.json',
+'/tg.js'
 ];
+
 
 // Install Service Worker
 self.addEventListener('install', (event) => {
@@ -86,3 +86,4 @@ self.addEventListener('error', (event) => {
 self.addEventListener('unhandledrejection', (event) => {
     console.error('Unhandled promise rejection:', event.reason);
 });
+
