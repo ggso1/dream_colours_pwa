@@ -7,7 +7,13 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
+
+
+
 
 .app-container {
     width: 100%;
@@ -80,20 +86,18 @@ body {
     font-size: 60px;
     margin-bottom: 20px;
     color: #d97706;
-    font-family: "Merriweather", serif;
 }
 
 .slide-text {
     font-size: 18px;
     font-weight: 500;
     color: #92400e;
-    font-family: "Ubuntu", sans-serif;
+
 }
 
 .slide-hint {
     color: #FFF9C4;
     font-size: 20px;
-    font-family: "Lobster", sans-serif;
 }
 
 /* slide2 */
@@ -137,7 +141,6 @@ body {
     align-items: center;
     justify-content: center;
     line-height: 1.4;
-    font-family: "Ubuntu", sans-serif;
 }
 
 
@@ -179,14 +182,12 @@ body {
     font-size: 32px;
     font-weight: 800;
     color: #1E3A8A;
-    font-family: "Merriweather", serif;
 }
 
 .slide-text-mood {
     font-size: 18px;
     font-weight: 500;
     color: #192853;
-    font-family: "Ubuntu", sans-serif;
 }
 
 /* slide3 */
@@ -202,15 +203,13 @@ body {
 .slide-title--colors {
     font-size: 32px;
     font-weight: 800;
-  color: #053820;
-    font-family: "Merriweather", serif;
+    color: #053820;
 }
 
- .slide-text--colors{
- font-size: 18px;
+.slide-text--colors {
+    font-size: 18px;
     font-weight: 500;
     color: #053820;
-    font-family: "Ubuntu", sans-serif;
 }
 
 /* Сітка кольорових квадратів */
@@ -269,6 +268,7 @@ body {
     background-color: #5E35B1;
     justify-content: center;
     padding-top: 20px;
+    position: relative;
 }
 
 .slide-card--meditation {
@@ -276,10 +276,10 @@ body {
 }
 
 .slide-title--meditation {
-   font-size: 32px;
+    font-size: 32px;
     font-weight: 800;
-    color: #1E3A8A; overflow-wrap: break-word;
-    font-family: "Merriweather", serif;
+    color: #1E3A8A;
+    overflow-wrap: break-word;
 }
 
 .meditation-options-grid {
@@ -319,12 +319,12 @@ body {
     color: #04120e;
 }
 
-.slide-title--meditationp{
-   font-size: 18px;
+.slide-title--meditationp {
+    font-size: 18px;
     font-weight: 500;
     color: #5E35B1;
-    font-family: "Ubuntu", sans-serif;
 }
+
 
 .modal {
     display: none;
@@ -333,30 +333,24 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 20;
-    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.7);
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 }
 
 
 .modal-content {
-    background-color: #FFFFFF;
-    padding: 25px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 350px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-    position: relative;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-    text-align: left;
-    color: #333;
-    /* Додайте margin: auto; щоб забезпечити правильне центрування у flex-контейнері,
-       особливо з урахуванням анімації animatetop. */
-    margin: auto;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 17%;
+    max-width: 400px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+
 }
+
 
 .modal-content h3 {
     color: #1E3A8A;
@@ -369,6 +363,30 @@ body {
     font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
+}
+
+#mediaModal {
+    display: none;
+    position: absolute  ;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-contentmedia{
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 85%;
+    max-width: 400px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+
 }
 
 /* Анімація появи */
@@ -400,12 +418,12 @@ body {
     margin-bottom: 20px;
     padding: 20px;
 }
-.slide-title--journal{
+
+.slide-title--journal {
     font-size: 30px;
     font-weight: 800;
-     color: #d6630b;
+    color: #d6630b;
     overflow-wrap: break-word;
-    font-family: "Merriweather", serif;
 }
 
 .sendtg-btn {
@@ -433,12 +451,16 @@ body {
     text-align: center;
 }
 
+#feedback-sent {}
+
+.tgsulka {}
+
+
 .description_tg {
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 30px;
     color: #FF6D00;
-    font-family: "Ubuntu", sans-serif;
 }
 
 .textarea {
@@ -455,21 +477,33 @@ body {
 /* ПАГІНАЦІЯ */
 .pagination-dots {
     position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     display: flex;
-    gap: 8px;
-    z-index: 10;
+    justify-content: center;
+    gap: 10px;
+    z-index: 1000;
+    pointer-events: none;
 }
 
 .dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, transform 0.3s;
+    background-color: #ffffff;
+    opacity: 0.5;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: auto;
     cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.dot.active {
+    opacity: 1;
+    transform: scale(1.2);
+    background-color: #ffffff;
 }
 
 .dot.active {

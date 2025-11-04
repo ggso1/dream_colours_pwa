@@ -38,45 +38,53 @@ function showMoodTip(element) {
 }
 
 
+// ----------------------------------------------------
 // ЛОГІКА СЛАЙДЕРА
+// ----------------------------------------------------
 
+const slider = document.getElementById('slider'); 
+const mobileFrame = document.getElementById('mobile-frame');
 
-const slides = Array.from(document.querySelectorAll('#slider > .slide'));
-const maxPage = slides.length - 1;
+// Перевірка наявності елементів
+if (!slider || !mobileFrame) {
+    console.error("Елементи Slider або Mobile Frame не знайдені. Слайдер не ініціалізовано.");
+}
+
+const slides = slider ? Array.from(slider.children).filter(el => el.classList.contains('slide')) : [];
+const maxPage = slides.length > 0 ? slides.length - 1 : 0;
 
 // Отримуємо індикатори
 const paginationContainer = document.getElementById('pagination');
-const dots = paginationContainer ? Array.from(paginationContainer.children) : []; // Перевірка на null
-const SWIPE_THRESHOLD = 80; // Мінімальна відстань для успішного свайпу (пікселів)
+const dots = paginationContainer ? Array.from(paginationContainer.children) : []; 
+const SWIPE_THRESHOLD = 80; 
 
 let currentPage = 0;
 let startX = 0;
 let isDragging = false;
 let currentTranslate = 0;
-let slideWidth = 0; // Ширина одного слайда
-const mobileFrame = document.getElementById('mobile-frame');
+let slideWidth = 0; 
 
-/**
- * Визначає ширину слайда, яка дорівнює ширині мобільного фрейму.
- */
+
+// Визначає ширину слайда, яка дорівнює ширині мобільного фрейму.
 function getSlideWidth() {
-    slideWidth = mobileFrame.clientWidth;
+    if (mobileFrame) {
+        slideWidth = mobileFrame.clientWidth;
+    }
 }
 
-/**
- * Оновлює вигляд індикаторів сторінок (крапок).
- */
+// Оновлює вигляд індикаторів сторінок (крапок).
 function updateDots() {
     dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === currentPage);
     });
 }
 
-/**
- * Переводить слайдер до поточної сторінки з анімацією або без.
- */
+
+// Переводить слайдер до поточної сторінки з анімацією або без.
 function snapToPage(animate = true) {
-    getSlideWidth(); // Оновлюємо ширину перед розрахунком
+    if (!slider || !mobileFrame) return;
+
+    getSlideWidth(); 
     currentTranslate = -currentPage * slideWidth;
 
     // Встановлення/зняття анімації
@@ -91,47 +99,45 @@ function snapToPage(animate = true) {
  * Обробник початку взаємодії (миша або дотик).
  */
 function handleStart(event) {
-    // Якщо взаємодія почалася всередині елементів вводу — не ініціюємо свайп
+    if (!mobileFrame || !slider) return;
+
     if (event.target && event.target.closest && event.target.closest('textarea, input, button, select, [contenteditable]')) {
         return;
     }
-    // Запобігаємо стандартному перетягуванню зображень, якщо це desktop
     if (event.type === 'mousedown') {
         event.preventDefault();
     }
 
     isDragging = true;
-    getSlideWidth(); // 👈 ВИПРАВЛЕННЯ: Гарантуємо, що slideWidth встановлена
+    getSlideWidth(); 
 
-    // Визначаємо початкову позицію X
     startX = event.touches ? event.touches[0].clientX : event.clientX;
-    // Вимикаємо CSS-анімацію під час перетягування
     slider.style.transition = 'none';
 
-    // Отримуємо точне поточне зміщення
     const transformMatch = slider.style.transform.match(/translateX\(([-.\d]+)px\)/);
     if (transformMatch) {
         currentTranslate = parseFloat(transformMatch[1]);
     } else {
-        // Якщо transform ще не було встановлено (початок роботи)
         currentTranslate = -currentPage * slideWidth;
     }
 }
 
 function handleMove(event) {
-    if (!isDragging) return;
+    if (!isDragging || !slider) return;
 
     const currentX = event.touches ? event.touches[0].clientX : event.clientX;
     const diffX = currentX - startX;
 
     getSlideWidth();
 
-    const maxTranslate = -maxPage * slideWidth;
+    const isOverBoundary = (currentPage === maxPage && diffX < 0) || (currentPage === 0 && diffX > 0);
 
-
-    if (currentPage === maxPage && diffX < 0) return;
-
-    if (currentPage === 0 && diffX > 0) return;
+    if (isOverBoundary) {
+         let friction = (1 - Math.abs(diffX) / slideWidth) * 0.5;
+         let newTranslate = currentTranslate + diffX * friction;
+         slider.style.transform = `translateX(${newTranslate}px)`;
+         return;
+    }
 
     let newTranslate = currentTranslate + diffX;
     slider.style.transform = `translateX(${newTranslate}px)`;
@@ -143,49 +149,41 @@ function handleMove(event) {
 
 
 function handleEnd(event) {
-    if (!isDragging) return;
+    if (!isDragging || !slider) return;
     isDragging = false;
 
     getSlideWidth();
 
-    // Використовуємо changedTouches для touch, clientX для mouse
     const endX = event.changedTouches ? event.changedTouches[0].clientX : event.clientX;
     const diffX = endX - startX;
 
     let newPage = currentPage;
 
-    // Перевірка, чи відбувся свайп за поріг та чи не знаходимося на останній сторінці
     if (Math.abs(diffX) > SWIPE_THRESHOLD) {
         if (diffX < 0 && currentPage < maxPage) {
-            // Свайп вліво (наступна сторінка), тільки якщо не на останній
             newPage = currentPage + 1;
-        } else if (diffX > 0) {
-            // Свайп вправо (попередня сторінка)
-            newPage = Math.max(0, currentPage - 1);
+        } else if (diffX > 0 && currentPage > 0) {
+            newPage = currentPage - 1;
         }
     }
 
     currentPage = newPage;
-
-    // Зафіксувати позицію на новій/поточній сторінці з анімацією
     snapToPage();
 }
-
-// Визначаємо контейнер, що приймає свайпи
-const touchElement = document.getElementById('mobile-frame');
 
 /**
  * Ініціалізація обробників подій слайдера.
  */
 function initSlider() {
+    if (!mobileFrame || !slider) return; 
+
     // Обробники подій для Touch (Мобільні пристрої)
-    touchElement.addEventListener('touchstart', handleStart, { passive: true }); // passive: true, щоб не блокувати основний потік
-    touchElement.addEventListener('touchmove', handleMove, { passive: false }); // passive: false, для event.preventDefault()
-    touchElement.addEventListener('touchend', handleEnd);
+    mobileFrame.addEventListener('touchstart', handleStart, { passive: true }); 
+    mobileFrame.addEventListener('touchmove', handleMove, { passive: false }); 
+    mobileFrame.addEventListener('touchend', handleEnd);
 
     // Обробники подій для Mouse (Десктоп)
-    touchElement.addEventListener('mousedown', handleStart);
-    // Додаємо до вікна, щоб не обривався свайп, якщо миша вийшла за межі фрейма
+    mobileFrame.addEventListener('mousedown', handleStart);
     window.addEventListener('mousemove', (e) => {
         if (isDragging) {
             handleMove(e);
@@ -201,7 +199,7 @@ function initSlider() {
         });
     });
 
-    // Обробка зміни розміру вікна для коректного позиціонування
+    // Обробка зміни розміру вікна
     window.addEventListener('resize', () => {
         snapToPage(false); // Без анімації
     });
@@ -211,43 +209,46 @@ function initSlider() {
 }
 
 
-
 // Запускаємо ініціалізацію після завантаження DOM
 window.onload = initSlider;
 
 
+// ----------------------------------------------------
+// ЛОГІКА МОДАЛЬНИХ ВІКОН ТА МЕДИТАЦІЇ
+// ----------------------------------------------------
 
-// Функція відкриття модального вікна
+// Функція відкриття загального модального вікна
 function openModal(color) {
-    document.getElementById('modal-' + color).style.display = 'flex'; // Змінено на 'flex' для центрування
+    const modal = document.getElementById('modal-' + color);
+    if (modal) {
+        modal.style.display = 'flex'; 
+    }
 }
 
-// Функція закриття модального вікна
+// Функція закриття загального модального вікна
 function closeModal(color) {
-    document.getElementById('modal-' + color).style.display = 'none';
+    const modal = document.getElementById('modal-' + color);
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 
 const meditationData = {
     forest: {
         title: "🌳 Медитація Лісу: Шепіт Природи",
-        // Приклад відео: "Звуки лісу для сну та медитації"
-        // УВАГА: Використовуйте тільки id відео (після watch?v=)
-        youtubeId: "jfch6h7gE2I"
+        youtubeId: "jfch6h7gE2I" 
     },
     ocean: {
         title: "🌊 Океанський Спокій: Хвилі",
-        // Приклад відео: "Звуки океану"
         youtubeId: "E0D90rT-vX4"
     },
     rain: {
         title: "🌧️ Звуки Дощу: Затишок та Релакс",
-        // Приклад відео: "Звуки дощу на даху"
         youtubeId: "c_q-s2kM4fU"
     },
     flute: {
         title: "🎶 Розслаблююча Флейта: Для Глибокого Сну",
-        // Приклад відео: "Розслаблююча музика"
         youtubeId: "kL6S7B9qC4E"
     }
 };
@@ -256,6 +257,7 @@ const mediaModal = document.getElementById('mediaModal');
 const mediaPlayer = document.getElementById('media-player');
 const mediaTitle = document.getElementById('media-title');
 
+
 /**
  * Відкриває модальне вікно з медіаплеєром (YouTube iframe).
  * @param {string} mood - Ключ медитації ('forest', 'ocean', і т.д.).
@@ -263,18 +265,15 @@ const mediaTitle = document.getElementById('media-title');
 function openMediaModal(mood) {
     const data = meditationData[mood];
 
-    if (data) {
-        // 1. Оновлюємо заголовок
+    if (data && mediaModal && mediaTitle && mediaPlayer) {
         mediaTitle.textContent = data.title;
-
-        // 2. Вбудовуємо YouTube плеєр (iframe)
-        // Додаємо параметри для автозапуску (autoplay=1) та приховування елементів керування (controls=0)
+        
+        // Параметри: autoplay=1, controls=0, mute=0 (якщо хочете звук), loop=1, playlist=ID (для повтору)
         mediaPlayer.innerHTML = `
-            <iframe src="https://www.youtube.com/embed/${data.youtubeId}?autoplay=1&controls=0&mute=0&rel=0&loop=1&playlist=${data.youtubeId}" frameborder="0" allow="autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/${data.youtubeId}?autoplay=1&controls=0&mute=0&rel=0&loop=1&playlist=${data.youtubeId}" frameborder="0" allow="autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         `;
-
-        // 3. Показуємо модальне вікно
-        mediaModal.style.display = 'flex'; // Змінено на 'flex' для центрування
+        
+        mediaModal.style.display = 'flex'; // Показуємо модальне вікно
     }
 }
 
@@ -282,21 +281,28 @@ function openMediaModal(mood) {
  * Закриває модальне вікно та зупиняє відтворення відео, очищаючи iframe.
  */
 function closeMediaModal() {
-    mediaModal.style.display = 'none';
-    // Зупиняємо відтворення, очищаючи вміст плеєра
-    mediaPlayer.innerHTML = '';
+    if (mediaModal) {
+        mediaModal.style.display = 'none';
+    }
+    if (mediaPlayer) {
+        mediaPlayer.innerHTML = ''; // Очищає iframe, зупиняючи відео
+    }
 }
 
-// 👈 ВИПРАВЛЕННЯ: Злита функція window.onclick (залишаємо тільки цей варіант)
+
+// 👇 ВИПРАВЛЕННИЙ ГЛОБАЛЬНИЙ ОБРОБНИК КЛІКУ
+// Тепер він коректно знаходить #mediaModal завдяки класу .modal в HTML.
 window.onclick = function (event) {
-    // Отримуємо всі модальні вікна
+    // Шукаємо всі елементи з класом 'modal'
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {
-        if (event.target == modal) {
-            // Перевіряємо, чи це модальне вікно медіа
+        // Перевіряємо, чи клік був саме на фоні модального вікна, а не на його вмісті
+        if (event.target === modal) {
+            // Спеціальна логіка для медіа-модального вікна
             if (modal.id === 'mediaModal') {
-                closeMediaModal();
+                closeMediaModal(); 
             } else {
+                // Логіка для інших модальних вікон
                 modal.style.display = 'none';
             }
         }

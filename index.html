@@ -7,12 +7,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="theme-color" content="#2196F3">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&display=swap" rel="stylesheet">
     <title>Подорож відчуттів</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json" />
@@ -24,7 +21,6 @@
             <div id="app" class="app-inner-wrapper">
 
                 <div id="slider">
-                    <!-- СЛАЙД 1: КОЛЬОРИ МРІЇ -->
                     <div id="slide-1" class="slide">
                         <div class="slide-card slide-card--sun">
                             <h1 class="slide-title slide-title--sun">Кольори Моєї Мрії</h1>
@@ -36,33 +32,25 @@
                         </div>
                     </div>
 
-                    <!-- СЛАЙД 2: СЕКЦІЯ НАСТРОЇВ ТА ПОРАД -->
                     <div id="slide-2" class="slide">
                         <div class="slide-card slide-card--mood">
-                            <h2 class="slide-title slide-title--mood">Обери свій Настрій</h2>
+                            <h1 class="slide-title slide-title--mood">Обери свій Настрій</h1>
                             <p class="slide-text-mood">Яку пораду ти шукаєш сьогодні?</p>
                         </div>
 
                         <div class="mood-selector-section">
-                            <!-- Сум -->
                             <div class="mood-option" data-mood="sad" onclick="showMoodTip(this)">
                                 <span class="emoji">😢</span>
                                 <p class="mood-label">Сум</p>
                             </div>
-
-                            <!-- Радість -->
                             <div class="mood-option" data-mood="happy" onclick="showMoodTip(this)">
                                 <span class="emoji">😊</span>
                                 <p class="mood-label">Радість</p>
                             </div>
-
-                            <!-- Злість -->
                             <div class="mood-option" data-mood="angry" onclick="showMoodTip(this)">
                                 <span class="emoji">😡</span>
                                 <p class="mood-label">Злість</p>
                             </div>
-
-                            <!-- Спокій -->
                             <div class="mood-option" data-mood="calm" onclick="showMoodTip(this)">
                                 <span class="emoji">🧘</span>
                                 <p class="mood-label">Спокій</p>
@@ -75,10 +63,9 @@
                     </div>
 
 
-                    <!-- СЛАЙД 3: КОЛЬОРИ ТА ЕМОЦІЇ -->
                     <div id="slide-3" class="slide">
                         <div class="slide-card slide-card--colors">
-                            <h2 class="slide-title slide-title--colors">Кольори та Емоції</h2>
+                            <h1 class="slide-title slide-title--colors">Кольори та Емоції</h1>
                             <p class="slide-text slide-text--colors">
                                 Натисніть на квадрат, щоб дізнатися, які емоції він викликає.
                             </p>
@@ -94,11 +81,11 @@
                         </div>
                     </div>
 
-                    <!-- СЛАЙД 4: МЕДИТАЦІЯ -->
                     <div id="slide-4" class="slide">
                         <div class="slide-card slide-card--meditation">
-                            <h2 class="slide-title slide-title--meditation"> Світи Медитації</h2>
-                            <p class="slide-text slide-title--meditationp">Оберіть свій пейзаж для заспокоєння та відновлення.</p>
+                            <h1 class="slide-title slide-title--meditation"> Світи Медитації</h1>
+                            <p class="slide-text slide-title--meditationp">Оберіть свій пейзаж для заспокоєння та
+                                відновлення.</p>
 
                             <div class="meditation-options-grid">
                                 <div class="meditation-option" onclick="openMediaModal('forest')">
@@ -119,14 +106,19 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div id="mediaModal" class="modal"> 
+                            <div class="modal-contentmedia">
+                                <h2 id="media-title">Медитація</h2>
+                                <div id="media-player" class="media-player"></div>
+                            </div>
+                        </div> 
                     </div>
 
 
-
-                    <!-- СЛАЙД 5: ЩОДЕННИК КОЛЬОРІВ -->
                     <div id="slide-5" class="slide">
                         <div class="slide-card5 slide-card--journal">
-                            <h2 class="slide-title slide-title--journal">Щоденник Кольорів</h2>
+                            <h1 class="slide-title slide-title--journal">Щоденник Кольорів</h1>
                             <form id="feedback-form">
                                 <label class="description_tg" for="feedback">Поділіться своїм настроєм і кольором, що
                                     його передає:</label>
@@ -138,103 +130,86 @@
                             <p class="tgsulka">Наша група - <a href="https://t.me/+BYX5H_16yYY4NmRi"
                                     target="_blank">https://t.me/+gvSeKyx1Fy40Mjky</a></p>
                         </div>
-
                     </div>
 
-                    <!-- СЛАЙД 7 -->
-                   <div id="slide-7" class="slide">
-    <div class="slide-card slide-card--finish">
-        <h2 class="slide-title slide-title--finish">🌈 Дякуємо!</h2>
-        <p class="slide-text">Ви пройшли всю кольорову подорож. Нехай ваш світ буде яскравим!</p>
-    </div>
-</div>
+                    <div id="slide-7" class="slide">
+                        <div class="slide-card slide-card--finish">
+                            <h1 class="slide-title slide-title--finish">🌈 Дякуємо!</h1>
+                            <p class="slide-text">Ви пройшли всю кольорову подорож. Нехай ваш світ буде яскравим!</p>
+                        </div>
+                    </div>
 
-<!-- ЧЕРВОНИЙ -->
-<div id="modal-red" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('red')">&times;</span>
-        <h3>🔴 Червоний: Пристрасть та Енергія</h3>
-        <p>Це колір <strong>пристрасті</strong>, <strong>сили</strong> та <strong>енергії</strong>. 
-        Він стимулює активність, привертає увагу й символізує любов та рішучість.</p>
-    </div>
-</div>
+                    <div id="modal-red" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closeModal('red')">&times;</span>
+                            <h3>🔴 Червоний: Пристрасть та Енергія</h3>
+                            <p>Це колір <strong>пристрасті</strong>, <strong>сили</strong> та <strong>енергії</strong>.
+                                Він стимулює активність, привертає увагу й символізує любов та рішучість.</p>
+                        </div>
+                    </div>
 
-<!-- СИНІЙ -->
-<div id="modal-blue" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('blue')">&times;</span>
-        <h3>🔵 Синій: Спокій та Гармонія</h3>
-        <p>Синій символізує <strong>спокій</strong>, <strong>довіру</strong> і <strong>мудрість</strong>. 
-        Це колір неба й моря, який заспокоює думки та допомагає зосередитись.</p>
-    </div>
-</div>
+                    <div id="modal-blue" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closeModal('blue')">&times;</span>
+                            <h3>🔵 Синій: Спокій та Гармонія</h3>
+                            <p>Синій символізує <strong>спокій</strong>, <strong>довіру</strong> і
+                                <strong>мудрість</strong>.
+                                Це колір неба й моря, який заспокоює думки та допомагає зосередитись.</p>
+                        </div>
+                    </div>
 
-<!-- ЖОВТИЙ -->
-<div id="modal-yellow" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('yellow')">&times;</span>
-        <h3>🟡 Жовтий: Радість та Оптимізм</h3>
-        <p>Жовтий асоціюється з <strong>сонцем</strong>, <strong>теплом</strong> і <strong>щастям</strong>. 
-        Він пробуджує творчість і заряджає позитивною енергією.</p>
-    </div>
-</div>
+                    <div id="modal-yellow" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closeModal('yellow')">&times;</span>
+                            <h3>🟡 Жовтий: Радість та Оптимізм</h3>
+                            <p>Жовтий асоціюється з <strong>сонцем</strong>, <strong>теплом</strong> і
+                                <strong>щастям</strong>.
+                                Він пробуджує творчість і заряджає позитивною енергією.</p>
+                        </div>
+                    </div>
 
-<!-- ЗЕЛЕНИЙ -->
-<div id="modal-green" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('green')">&times;</span>
-        <h3>🟢 Зелений: Гармонія та Спокій</h3>
-        <p>Зелений — це колір <strong>природи</strong>, <strong>життя</strong> і <strong>балансу</strong>. 
-        Він заспокоює, зменшує стрес і символізує відновлення.</p>
-    </div>
-</div>
+                    <div id="modal-green" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closeModal('green')">&times;</span>
+                            <h3>🟢 Зелений: Гармонія та Спокій</h3>
+                            <p>Зелений — це колір <strong>природи</strong>, <strong>життя</strong> і
+                                <strong>балансу</strong>.
+                                Він заспокоює, зменшує стрес і символізує відновлення.</p>
+                        </div>
+                    </div>
 
-<!-- ФІОЛЕТОВИЙ -->
-<div id="modal-purple" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('purple')">&times;</span>
-        <h3>🟣 Фіолетовий: Таємниця та Творчість</h3>
-        <p>Фіолетовий поєднує <strong>емоції</strong> і <strong>інтуїцію</strong>. 
-        Це колір мистецтва, мрій і духовного розвитку.</p>
-    </div>
-</div>
+                    <div id="modal-purple" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closeModal('purple')">&times;</span>
+                            <h3>🟣 Фіолетовий: Таємниця та Творчість</h3>
+                            <p>Фіолетовий поєднує <strong>емоції</strong> і <strong>інтуїцію</strong>.
+                                Це колір мистецтва, мрій і духовного розвитку.</p>
+                        </div>
+                    </div>
 
-<!-- ОРАНЖЕВИЙ -->
-<div id="modal-orange" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal('orange')">&times;</span>
-        <h3>🟠 Оранжевий: Енергія та Натхнення</h3>
-        <p>Оранжевий символізує <strong>ентузіазм</strong>, <strong>дружелюбність</strong> і <strong>життєву силу</strong>. 
-        Він спонукає до дій і піднімає настрій.</p>
-    </div>
-</div>
-
-<!-- МОДАЛЬНЕ ВІКНО ДЛЯ МЕДІА -->
-<div id="mediaModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeMediaModal()">&times;</span>
-        <h3 id="media-title"></h3>
-        <div id="media-player"></div>
-    </div>
-</div>
-
-
-
-    <div id="pagination" class="pagination-dots">
-        <span id="dot-0" class="dot active"></span>
-        <span id="dot-1" class="dot"></span>
-        <span id="dot-2" class="dot"></span>
-        <span id="dot-3" class="dot"></span>
-        <span id="dot-4" class="dot"></span>
-        <span id="dot-5" class="dot"></span>
-    </div>
-    </div>
-    </div>
-    </div>
-    <script src="tg.js"></script>
-    <script src="app.js"></script>
-
-
+                    <div id="modal-orange" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closeModal('orange')">&times;</span>
+                            <h3>🟠 Оранжевий: Енергія та Натхнення</h3>
+                            <p>Оранжевий символізує <strong>ентузіазм</strong>, <strong>дружелюбність</strong> і
+                                <strong>життєву силу</strong>.
+                                Він спонукає до дій і піднімає настрій.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div id="pagination" class="pagination-dots">
+                    <span id="dot-0" class="dot active"></span>
+                    <span id="dot-1" class="dot"></span>
+                    <span id="dot-2" class="dot"></span>
+                    <span id="dot-3" class="dot"></span>
+                    <span id="dot-4" class="dot"></span>
+                    <span id="dot-5" class="dot"></span>
+                </div>
+            </div>
+        </div>
+        <script src="tg.js"></script>
+        <script src="app.js"></script> </div>
 </body>
 
 </html>
