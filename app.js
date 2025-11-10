@@ -237,19 +237,19 @@ function closeModal(color) {
 const meditationData = {
     forest: {
         title: "🌳 Медитація Лісу: Шепіт Природи",
-        youtubeId: "jfch6h7gE2I" 
+        youtubeId: "T_hXhK77-J4" 
     },
     ocean: {
         title: "🌊 Океанський Спокій: Хвилі",
-        youtubeId: "E0D90rT-vX4"
+        youtubeId: "JBH4VpT3wTg",
     },
     rain: {
         title: "🌧️ Звуки Дощу: Затишок та Релакс",
-        youtubeId: "c_q-s2kM4fU"
+        youtubeId: "a97nQsJCpoI"
     },
     flute: {
         title: "🎶 Розслаблююча Флейта: Для Глибокого Сну",
-        youtubeId: "kL6S7B9qC4E"
+        youtubeId: "aY3JFOGY5KI"
     }
 };
 
