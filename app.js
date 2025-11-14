@@ -42,7 +42,7 @@ function showMoodTip(element) {
 // ЛОГІКА СЛАЙДЕРА
 // ----------------------------------------------------
 
-const slider = document.getElementById('slider'); 
+const slider = document.getElementById('slider');
 const mobileFrame = document.getElementById('mobile-frame');
 
 // Перевірка наявності елементів
@@ -55,14 +55,14 @@ const maxPage = slides.length > 0 ? slides.length - 1 : 0;
 
 // Отримуємо індикатори
 const paginationContainer = document.getElementById('pagination');
-const dots = paginationContainer ? Array.from(paginationContainer.children) : []; 
-const SWIPE_THRESHOLD = 80; 
+const dots = paginationContainer ? Array.from(paginationContainer.children) : [];
+const SWIPE_THRESHOLD = 80;
 
 let currentPage = 0;
 let startX = 0;
 let isDragging = false;
 let currentTranslate = 0;
-let slideWidth = 0; 
+let slideWidth = 0;
 
 
 // Визначає ширину слайда, яка дорівнює ширині мобільного фрейму.
@@ -84,7 +84,7 @@ function updateDots() {
 function snapToPage(animate = true) {
     if (!slider || !mobileFrame) return;
 
-    getSlideWidth(); 
+    getSlideWidth();
     currentTranslate = -currentPage * slideWidth;
 
     // Встановлення/зняття анімації
@@ -109,7 +109,7 @@ function handleStart(event) {
     }
 
     isDragging = true;
-    getSlideWidth(); 
+    getSlideWidth();
 
     startX = event.touches ? event.touches[0].clientX : event.clientX;
     slider.style.transition = 'none';
@@ -133,10 +133,10 @@ function handleMove(event) {
     const isOverBoundary = (currentPage === maxPage && diffX < 0) || (currentPage === 0 && diffX > 0);
 
     if (isOverBoundary) {
-         let friction = (1 - Math.abs(diffX) / slideWidth) * 0.5;
-         let newTranslate = currentTranslate + diffX * friction;
-         slider.style.transform = `translateX(${newTranslate}px)`;
-         return;
+        let friction = (1 - Math.abs(diffX) / slideWidth) * 0.5;
+        let newTranslate = currentTranslate + diffX * friction;
+        slider.style.transform = `translateX(${newTranslate}px)`;
+        return;
     }
 
     let newTranslate = currentTranslate + diffX;
@@ -175,11 +175,11 @@ function handleEnd(event) {
  * Ініціалізація обробників подій слайдера.
  */
 function initSlider() {
-    if (!mobileFrame || !slider) return; 
+    if (!mobileFrame || !slider) return;
 
     // Обробники подій для Touch (Мобільні пристрої)
-    mobileFrame.addEventListener('touchstart', handleStart, { passive: true }); 
-    mobileFrame.addEventListener('touchmove', handleMove, { passive: false }); 
+    mobileFrame.addEventListener('touchstart', handleStart, { passive: true });
+    mobileFrame.addEventListener('touchmove', handleMove, { passive: false });
     mobileFrame.addEventListener('touchend', handleEnd);
 
     // Обробники подій для Mouse (Десктоп)
@@ -214,97 +214,69 @@ window.onload = initSlider;
 
 
 // ----------------------------------------------------
-// ЛОГІКА МОДАЛЬНИХ ВІКОН ТА МЕДИТАЦІЇ
+// ЛОГІКА МОДАЛЬНИХ ВІКОН ТА МЕДИТАЦІЇ (ВИПРАВЛЕНО)
 // ----------------------------------------------------
 
-// Функція відкриття загального модального вікна
+// Функція відкриття будь-якої колірної модалки
 function openModal(color) {
     const modal = document.getElementById('modal-' + color);
-    if (modal) {
-        modal.style.display = 'flex'; 
-    }
+    if (modal) modal.style.display = 'flex';
 }
 
-// Функція закриття загального модального вікна
+// Функція закриття будь-якої колірної модалки
 function closeModal(color) {
     const modal = document.getElementById('modal-' + color);
-    if (modal) {
-        modal.style.display = 'none';
-    }
+    if (modal) modal.style.display = 'none';
 }
 
-
+// Дані медитацій (виправлено шляхи до файлів у папці `video`)
 const meditationData = {
-    forest: {
-        title: "🌳 Медитація Лісу: Шепіт Природи",
-        youtubeId: "T_hXhK77-J4" 
-    },
-    ocean: {
-        title: "🌊 Океанський Спокій: Хвилі",
-        youtubeId: "JBH4VpT3wTg",
-    },
-    rain: {
-        title: "🌧️ Звуки Дощу: Затишок та Релакс",
-        youtubeId: "a97nQsJCpoI"
-    },
-    flute: {
-        title: "🎶 Розслаблююча Флейта: Для Глибокого Сну",
-        youtubeId: "aY3JFOGY5KI"
-    }
+    forest: { title: "🌳 Медитація Лісу: Шепіт Природи", file: "video/forest.mp4" },
+    ocean: { title: "🌊 Океанський Спокій: Хвилі", file: "video/ocean.mp4" },
+    rain: { title: "🌧️ Звуки Дощу: Затишок та Релакс", file: "video/rain.mp4" },
+    flute: { title: "🎶 Розслаблююча Флейта: Для Глибокого Сну", file: "video/flute.mp4" }
 };
+
 
 const mediaModal = document.getElementById('mediaModal');
 const mediaPlayer = document.getElementById('media-player');
 const mediaTitle = document.getElementById('media-title');
 
-
-/**
- * Відкриває модальне вікно з медіаплеєром (YouTube iframe).
- * @param {string} mood - Ключ медитації ('forest', 'ocean', і т.д.).
- */
 function openMediaModal(mood) {
     const data = meditationData[mood];
+    if (!data || !mediaModal || !mediaPlayer || !mediaTitle) return;
 
-    if (data && mediaModal && mediaTitle && mediaPlayer) {
-        mediaTitle.textContent = data.title;
-        
-        // Параметри: autoplay=1, controls=0, mute=0 (якщо хочете звук), loop=1, playlist=ID (для повтору)
-        mediaPlayer.innerHTML = `
-            <iframe width="100%" height="200" src="https://www.youtube.com/embed/${data.youtubeId}?autoplay=1&controls=0&mute=0&rel=0&loop=1&playlist=${data.youtubeId}" frameborder="0" allow="autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        `;
-        
-        mediaModal.style.display = 'flex'; // Показуємо модальне вікно
-    }
+    mediaTitle.textContent = data.title;
+    // Додаємо playsinline для коректного відтворення на мобільних, і обмежуємо висоту через стиль
+    mediaPlayer.innerHTML = `
+        <video width="100%" style="max-height:60vh;" autoplay muted loop controls playsinline webkit-playsinline>
+            <source src="${data.file}" type="video/mp4">
+            Ваш браузер не підтримує відео.
+        </video>
+    `;
+    mediaModal.style.display = 'flex';
 }
 
-/**
- * Закриває модальне вікно та зупиняє відтворення відео, очищаючи iframe.
- */
+// Закриття медіа-модалки
 function closeMediaModal() {
-    if (mediaModal) {
-        mediaModal.style.display = 'none';
-    }
-    if (mediaPlayer) {
-        mediaPlayer.innerHTML = ''; // Очищає iframe, зупиняючи відео
-    }
+    if (mediaModal) mediaModal.style.display = 'none';
+    if (mediaPlayer) mediaPlayer.innerHTML = '';
 }
 
-
-// 👇 ВИПРАВЛЕННИЙ ГЛОБАЛЬНИЙ ОБРОБНИК КЛІКУ
-// Тепер він коректно знаходить #mediaModal завдяки класу .modal в HTML.
+// ----------------------
+// ОБРОБНИК КЛІКУ НА ФОН
+// ----------------------
 window.onclick = function (event) {
-    // Шукаємо всі елементи з класом 'modal'
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        // Перевіряємо, чи клік був саме на фоні модального вікна, а не на його вмісті
+    // Колірні модалки
+    const colorModals = document.querySelectorAll('.modal:not(#mediaModal)');
+    colorModals.forEach(modal => {
         if (event.target === modal) {
-            // Спеціальна логіка для медіа-модального вікна
-            if (modal.id === 'mediaModal') {
-                closeMediaModal(); 
-            } else {
-                // Логіка для інших модальних вікон
-                modal.style.display = 'none';
-            }
+            modal.style.display = 'none';
         }
     });
+
+    // Медіа-модалка окремо
+    if (event.target === mediaModal) {
+        closeMediaModal();
+    }
 }

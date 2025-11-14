@@ -367,7 +367,7 @@ body {
 
 #mediaModal {
     display: none;
-    position: absolute  ;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -378,15 +378,36 @@ body {
     z-index: 9999;
 }
 
-.modal-contentmedia{
+.modal-contentmedia {
     background: white;
     border-radius: 15px;
     padding: 20px;
+    margin: 10px;
     text-align: center;
-    width: 85%;
-    max-width: 400px;
+    width: 92%;
+    max-width: 900px;
+    /* дозволяє відео бути значно ширшим на десктопі */
+    position: relative;
+    /* щоб абсолютний .close-btn позиціонувався відносно модалки */
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 
+}
+
+/* Стилі для відео всередині модалки: робимо його більшим та адаптивним */
+.modal-contentmedia video {
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+    /* відео не займатиме більше 75% висоти вікна */
+    border-radius: 12px;
+    background: #000;
+    /* чорний фон під час завантаження */
+}
+
+@media (min-width: 768px) {
+    .modal-contentmedia {
+        padding: 24px;
+    }
 }
 
 /* Анімація появи */
@@ -526,4 +547,34 @@ body {
 .close-btn:hover,
 .close-btn:focus {
     color: #333;
+}
+
+/* Додайте це до кінця вашого styles.css */
+/* slide7 - Ігровий слайд */
+#slide-7 {
+    background-color: #A7FFEB;
+    /* Світло-зелений фон для ігрового розділу */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.game-wrapper {
+    width: 90%;
+    height: 90%;
+    max-width: 350px;
+    max-height: 550px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    background-color: #FFFFFF;
+    /* Фон для Canvas */
+}
+
+#dreamCanvas {
+    /* Розмір вже задається в JS, але тут можна додати початкові стилі */
+    display: block;
+    background-color: #E0F7FA;
+    /* Дуже світло-блакитний фон неба */
 }

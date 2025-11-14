@@ -1,11 +1,15 @@
 const CACHE_NAME = 'pwa-cache-v1';
 const FILES_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/app.js',
-  '/manifest.json',
-'/tg.js'
+    '/',
+    '/index.html',
+    '/styles.css',
+    '/app.js',
+    '/manifest.json',
+    '/tg.js',
+    '/video/forest.mp4',
+    '/video/ocean.mp4',
+    '/video/rain.mp4',
+    '/video/flute.mp4'
 ];
 
 
@@ -15,7 +19,8 @@ self.addEventListener('install', (event) => {
         caches.open(CACHE_NAME)
             .then((cache) => {
                 console.log('Cache opened');
-                return cache.addAll(ASSETS_TO_CACHE.map(url => new Request(url, { credentials: 'same-origin' })));
+                // map FILES_TO_CACHE to Requests so credentials/scope are preserved
+                return cache.addAll(FILES_TO_CACHE.map(url => new Request(url, { credentials: 'same-origin' })));
             })
             .catch((error) => {
                 console.error('Cache installation failed:', error);
