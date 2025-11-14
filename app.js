@@ -1,4 +1,4 @@
-// Об'єкт зі зборами порад для різних настроїв
+
 const moodTips = {
     sad: "❤️ Порада для Суму: Дозвольте собі сумувати, але потім зробіть маленьку, приємну для вас справу (випийте какао, подивіться улюблений фільм).",
     happy: "☀️ Порада для Радості: Поділіться своїм щастям з кимось і подумайте про три речі, за які ви вдячні сьогодні. Це продовжить відчуття радості!",
@@ -8,29 +8,28 @@ const moodTips = {
 };
 
 /**
- * Показує пораду, відповідну обраному емодзі, та виділяє активний елемент.
- * @param {HTMLElement} element - Контейнер емодзі, на який клікнули.
+ * @param {HTMLElement} element 
  */
 function showMoodTip(element) {
-    const mood = element.getAttribute('data-mood'); // Отримуємо 'sad', 'happy', 'angry', 'calm'
+    const mood = element.getAttribute('data-mood');
     const tipText = moodTips[mood];
     const displayElement = document.getElementById('tip-display');
     const allOptions = document.querySelectorAll('.mood-option');
 
-    // 1. Прибрати активний клас з усіх опцій
+
     allOptions.forEach(option => option.classList.remove('active'));
 
-    // 2. Додати активний клас до клікнутого елемента
+
     element.classList.add('active');
 
-    // 3. Показати відповідну пораду з анімацією
+
     if (tipText) {
-        displayElement.style.opacity = '0'; // Для ефекту зникнення/появи
+        displayElement.style.opacity = '0';
 
         setTimeout(() => {
             displayElement.textContent = tipText;
             displayElement.style.opacity = '1';
-        }, 150); // Затримка для анімації
+        }, 150);
     } else {
         displayElement.textContent = moodTips.default;
         displayElement.style.opacity = '1';
@@ -38,14 +37,13 @@ function showMoodTip(element) {
 }
 
 
-// ----------------------------------------------------
-// ЛОГІКА СЛАЙДЕРА
-// ----------------------------------------------------
+
+//  ЛОГІКА СЛАЙДЕРА
 
 const slider = document.getElementById('slider');
 const mobileFrame = document.getElementById('mobile-frame');
 
-// Перевірка наявності елементів
+
 if (!slider || !mobileFrame) {
     console.error("Елементи Slider або Mobile Frame не знайдені. Слайдер не ініціалізовано.");
 }
@@ -65,14 +63,12 @@ let currentTranslate = 0;
 let slideWidth = 0;
 
 
-// Визначає ширину слайда, яка дорівнює ширині мобільного фрейму.
 function getSlideWidth() {
     if (mobileFrame) {
         slideWidth = mobileFrame.clientWidth;
     }
 }
 
-// Оновлює вигляд індикаторів сторінок (крапок).
 function updateDots() {
     dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === currentPage);
@@ -80,24 +76,21 @@ function updateDots() {
 }
 
 
-// Переводить слайдер до поточної сторінки з анімацією або без.
 function snapToPage(animate = true) {
     if (!slider || !mobileFrame) return;
 
     getSlideWidth();
     currentTranslate = -currentPage * slideWidth;
 
-    // Встановлення/зняття анімації
+
     slider.style.transition = animate ? 'transform 0.5s ease-out' : 'none';
 
-    // Встановлення фінальної позиції
+
     slider.style.transform = `translateX(${currentTranslate}px)`;
     updateDots();
 }
 
-/**
- * Обробник початку взаємодії (миша або дотик).
- */
+
 function handleStart(event) {
     if (!mobileFrame || !slider) return;
 
@@ -171,18 +164,16 @@ function handleEnd(event) {
     snapToPage();
 }
 
-/**
- * Ініціалізація обробників подій слайдера.
- */
+
+
 function initSlider() {
     if (!mobileFrame || !slider) return;
 
-    // Обробники подій для Touch (Мобільні пристрої)
     mobileFrame.addEventListener('touchstart', handleStart, { passive: true });
     mobileFrame.addEventListener('touchmove', handleMove, { passive: false });
     mobileFrame.addEventListener('touchend', handleEnd);
 
-    // Обробники подій для Mouse (Десктоп)
+
     mobileFrame.addEventListener('mousedown', handleStart);
     window.addEventListener('mousemove', (e) => {
         if (isDragging) {
@@ -191,7 +182,6 @@ function initSlider() {
     });
     window.addEventListener('mouseup', handleEnd);
 
-    // Обробники кліку на точки пагінації
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
             currentPage = index;
@@ -199,37 +189,48 @@ function initSlider() {
         });
     });
 
-    // Обробка зміни розміру вікна
+
     window.addEventListener('resize', () => {
-        snapToPage(false); // Без анімації
+        snapToPage(false);
     });
 
-    // Початкова ініціалізація
+
     snapToPage(false);
 }
 
 
-// Запускаємо ініціалізацію після завантаження DOM
+
 window.onload = initSlider;
 
 
-// ----------------------------------------------------
-// ЛОГІКА МОДАЛЬНИХ ВІКОН ТА МЕДИТАЦІЇ (ВИПРАВЛЕНО)
-// ----------------------------------------------------
 
-// Функція відкриття будь-якої колірної модалки
+// ЛОГІКА МОДАЛЬНИХ ВІКОН ТА МЕДИТАЦІЇ 
+
 function openModal(color) {
     const modal = document.getElementById('modal-' + color);
     if (modal) modal.style.display = 'flex';
 }
 
-// Функція закриття будь-якої колірної модалки
 function closeModal(color) {
     const modal = document.getElementById('modal-' + color);
     if (modal) modal.style.display = 'none';
 }
 
-// Дані медитацій (виправлено шляхи до файлів у папці `video`)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+        const openModal = Array.from(document.querySelectorAll('.modal')).find(m => getComputedStyle(m).display !== 'none');
+        if (openModal && openModal.id) {
+            if (openModal.id.startsWith('modal-')) {
+                const colorName = openModal.id.replace('modal-', '');
+                closeModal(colorName);
+            } else if (openModal.id === 'mediaModal') {
+                closeMediaModal();
+            }
+        }
+    }
+});
+
+// Дані медитацій 
 const meditationData = {
     forest: { title: "🌳 Медитація Лісу: Шепіт Природи", file: "video/forest.mp4" },
     ocean: { title: "🌊 Океанський Спокій: Хвилі", file: "video/ocean.mp4" },
@@ -247,7 +248,6 @@ function openMediaModal(mood) {
     if (!data || !mediaModal || !mediaPlayer || !mediaTitle) return;
 
     mediaTitle.textContent = data.title;
-    // Додаємо playsinline для коректного відтворення на мобільних, і обмежуємо висоту через стиль
     mediaPlayer.innerHTML = `
         <video width="100%" style="max-height:60vh;" autoplay muted loop controls playsinline webkit-playsinline>
             <source src="${data.file}" type="video/mp4">
@@ -263,11 +263,10 @@ function closeMediaModal() {
     if (mediaPlayer) mediaPlayer.innerHTML = '';
 }
 
-// ----------------------
+
 // ОБРОБНИК КЛІКУ НА ФОН
-// ----------------------
+
 window.onclick = function (event) {
-    // Колірні модалки
     const colorModals = document.querySelectorAll('.modal:not(#mediaModal)');
     colorModals.forEach(modal => {
         if (event.target === modal) {
@@ -275,8 +274,35 @@ window.onclick = function (event) {
         }
     });
 
-    // Медіа-модалка окремо
     if (event.target === mediaModal) {
         closeMediaModal();
+    }
+}
+
+/**
+ * @param {string} colorName 
+ */
+function tryColor(colorName) {
+    const colorMap = {
+        'red': '#E63946',
+        'blue': '#457B9D',
+        'yellow': '#FFC300',
+        'green': '#2A9D8F',
+        'purple': '#6F42C1',
+        'orange': '#FF8C00'
+    };
+
+    const body = document.body;
+    const originalColor = body.style.backgroundColor || getComputedStyle(body).backgroundColor;
+
+    if (colorMap[colorName]) {
+        body.style.backgroundColor = colorMap[colorName];
+        closeModal(colorName);
+
+        setTimeout(() => {
+            if (body.style.backgroundColor === colorMap[colorName]) {
+                body.style.backgroundColor = originalColor;
+            }
+        }, 3000);
     }
 }

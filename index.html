@@ -109,7 +109,6 @@
 
                         <div id="mediaModal" class="modal">
                             <div class="modal-contentmedia">
-                                <span class="close-btn" onclick="closeMediaModal()">&times;</span>
                                 <h2 id="media-title">Медитація</h2>
                                 <div id="media-player" class="media-player"></div>
                             </div>
@@ -141,63 +140,73 @@
 
                     <div id="modal-red" class="modal">
                         <div class="modal-content">
-                            <span class="close-btn" onclick="closeModal('red')">&times;</span>
+                            <button class="close-btn" aria-label="Закрити" onclick="closeModal('red')">&times;</button>
                             <h3>🔴 Червоний: Пристрасть та Енергія</h3>
                             <p>Це колір <strong>пристрасті</strong>, <strong>сили</strong> та <strong>енергії</strong>.
                                 Він стимулює активність, привертає увагу й символізує любов та рішучість.</p>
+                            <img class="modal-image" src="img/red.jpg" alt="">
                         </div>
                     </div>
 
                     <div id="modal-blue" class="modal">
                         <div class="modal-content">
-                            <span class="close-btn" onclick="closeModal('blue')">&times;</span>
+                            <button class="close-btn" aria-label="Закрити" onclick="closeModal('blue')">&times;</button>
                             <h3>🔵 Синій: Спокій та Гармонія</h3>
                             <p>Синій символізує <strong>спокій</strong>, <strong>довіру</strong> і
                                 <strong>мудрість</strong>.
                                 Це колір неба й моря, який заспокоює думки та допомагає зосередитись.
                             </p>
+                            <img class="modal-image" src="img/blue.jpg" alt="">
                         </div>
                     </div>
 
                     <div id="modal-yellow" class="modal">
                         <div class="modal-content">
-                            <span class="close-btn" onclick="closeModal('yellow')">&times;</span>
+                            <button class="close-btn" aria-label="Закрити"
+                                onclick="closeModal('yellow')">&times;</button>
                             <h3>🟡 Жовтий: Радість та Оптимізм</h3>
                             <p>Жовтий асоціюється з <strong>сонцем</strong>, <strong>теплом</strong> і
                                 <strong>щастям</strong>.
                                 Він пробуджує творчість і заряджає позитивною енергією.
                             </p>
+                            <img class="modal-image" src="img/yellow.png" alt="">
                         </div>
                     </div>
 
                     <div id="modal-green" class="modal">
                         <div class="modal-content">
-                            <span class="close-btn" onclick="closeModal('green')">&times;</span>
+                            <button class="close-btn" aria-label="Закрити"
+                                onclick="closeModal('green')">&times;</button>
                             <h3>🟢 Зелений: Гармонія та Спокій</h3>
                             <p>Зелений — це колір <strong>природи</strong>, <strong>життя</strong> і
                                 <strong>балансу</strong>.
                                 Він заспокоює, зменшує стрес і символізує відновлення.
                             </p>
+                            <img class="modal-image" src="img/green.png" alt="">
                         </div>
                     </div>
 
                     <div id="modal-purple" class="modal">
                         <div class="modal-content">
-                            <span class="close-btn" onclick="closeModal('purple')">&times;</span>
+                            <button class="close-btn" aria-label="Закрити"
+                                onclick="closeModal('purple')">&times;</button>
                             <h3>🟣 Фіолетовий: Таємниця та Творчість</h3>
                             <p>Фіолетовий поєднує <strong>емоції</strong> і <strong>інтуїцію</strong>.
                                 Це колір мистецтва, мрій і духовного розвитку.</p>
+                            <img class="modal-image" src="img/purple.png" alt="">
                         </div>
                     </div>
 
                     <div id="modal-orange" class="modal">
                         <div class="modal-content">
-                            <span class="close-btn" onclick="closeModal('orange')">&times;</span>
+                            <button class="close-btn" aria-label="Закрити"
+                                onclick="closeModal('orange')">&times;</button>
                             <h3>🟠 Оранжевий: Енергія та Натхнення</h3>
                             <p>Оранжевий символізує <strong>ентузіазм</strong>, <strong>дружелюбність</strong> і
                                 <strong>життєву силу</strong>.
                                 Він спонукає до дій і піднімає настрій.
                             </p>
+                            <img class="modal-image" src="img/orange.png" alt="">
                         </div>
                     </div>
 

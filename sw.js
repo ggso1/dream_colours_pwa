@@ -19,7 +19,6 @@ self.addEventListener('install', (event) => {
         caches.open(CACHE_NAME)
             .then((cache) => {
                 console.log('Cache opened');
-                // map FILES_TO_CACHE to Requests so credentials/scope are preserved
                 return cache.addAll(FILES_TO_CACHE.map(url => new Request(url, { credentials: 'same-origin' })));
             })
             .catch((error) => {
@@ -48,23 +47,18 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request)
             .then((response) => {
-                // Return cached version if found
                 if (response) {
                     return response;
                 }
 
-                // Clone the request because it's a one-time use stream
                 const fetchRequest = event.request.clone();
 
-                // Make network request and cache the response
                 return fetch(fetchRequest)
                     .then((response) => {
-                        // Check if we received a valid response
                         if (!response || response.status !== 200 || response.type !== 'basic') {
                             return response;
                         }
 
-                        // Clone the response because it's a one-time use stream
                         const responseToCache = response.clone();
 
                         caches.open(CACHE_NAME)
@@ -76,14 +70,12 @@ self.addEventListener('fetch', (event) => {
                     })
                     .catch((error) => {
                         console.log('Fetch failed:', error);
-                        // You might want to return a custom offline page here
                         return new Response('Offline content not available');
                     });
             })
     );
 });
 
-// Handle errors
 self.addEventListener('error', (event) => {
     console.error('Service Worker error:', event.error);
 });

@@ -1,5 +1,5 @@
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: "Merriweather", serif;
     background-color: #F8F8F8;
     height: 100vh;
     touch-action: manipulation;
@@ -7,13 +7,9 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    font-family: "Lobster", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
-
-
-
 
 .app-container {
     width: 100%;
@@ -108,7 +104,7 @@ body {
 }
 
 .slide-card--mood {
-    background-color: #81D4FA;
+    background-color: #B3E5FC;
 }
 
 .mood-selector-section {
@@ -117,7 +113,7 @@ body {
     gap: 20px;
     width: 90%;
     margin: 20px auto;
-    background-color: #81D4FA;
+    background-color: #B3E5FC;
     padding: 15px 10px;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -129,18 +125,13 @@ body {
     width: 90%;
     max-width: 600px;
     min-height: 60px;
-    border: 2px solid #3B82F6;
     border-radius: 12px;
-    background-color: #81D4FA;
-    text-align: center;
-    font-size: 16px;
+    background-color: #B3E5FC;
+    font-size: 19px;
     font-weight: 500;
-    color: #1D4ED8;
-    transition: opacity 0.3s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1.4;
+    color: #083b58;
+    line-height: 1.6;
+    text-align: left;
 }
 
 
@@ -174,42 +165,42 @@ body {
 
 .mood-option.active {
     background-color: #E0F2FE;
-    box-shadow: 0 0 0 3px #3B82F6;
+    box-shadow: 0 0 0 3px #B3E5FC;
 }
 
 
 .slide-title--mood {
     font-size: 32px;
     font-weight: 800;
-    color: #1E3A8A;
+    color: #0e4768;
 }
 
 .slide-text-mood {
     font-size: 18px;
     font-weight: 500;
-    color: #192853;
+    color: #0a344b;
 }
 
 /* slide3 */
 #slide-3 {
-    background-color: #00695C;
+    background-color: #2E7D32;
 }
 
 .slide-card--colors {
-    background-color: #A7FFEB;
+    background-color: #A5D6A7;
 }
 
 
 .slide-title--colors {
     font-size: 32px;
     font-weight: 800;
-    color: #053820;
+    color: #193d1b;
 }
 
 .slide-text--colors {
     font-size: 18px;
     font-weight: 500;
-    color: #053820;
+    color: #0d1b0d;
 }
 
 /* Сітка кольорових квадратів */
@@ -261,24 +252,29 @@ body {
     background-color: #E67E22;
 }
 
-
+.modal-image {
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 8px;
+}
 
 /* slide4 */
 #slide-4 {
-    background-color: #5E35B1;
+    background-color: #4B5563;
     justify-content: center;
     padding-top: 20px;
     position: relative;
 }
 
 .slide-card--meditation {
-    background-color: #D6BCF0;
+    background-color: #E5E7EB;
 }
 
 .slide-title--meditation {
     font-size: 32px;
     font-weight: 800;
-    color: #1E3A8A;
+    color: #333940;
     overflow-wrap: break-word;
 }
 
@@ -322,7 +318,7 @@ body {
 .slide-title--meditationp {
     font-size: 18px;
     font-weight: 500;
-    color: #5E35B1;
+    color: #202327;
 }
 
 
@@ -353,14 +349,15 @@ body {
 
 
 .modal-content h3 {
-    color: #1E3A8A;
     margin-top: 0;
-    font-size: 20px;
-    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+    color: #333;
 }
 
 .modal-content p {
-    font-size: 16px;
+    font-size: 20px;
+    text-align: justify;
     line-height: 1.5;
     font-weight: 400;
 }
@@ -386,22 +383,47 @@ body {
     text-align: center;
     width: 92%;
     max-width: 900px;
-    /* дозволяє відео бути значно ширшим на десктопі */
     position: relative;
-    /* щоб абсолютний .close-btn позиціонувався відносно модалки */
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 
 }
 
-/* Стилі для відео всередині модалки: робимо його більшим та адаптивним */
 .modal-contentmedia video {
     width: 100%;
     height: auto;
     max-height: 75vh;
-    /* відео не займатиме більше 75% висоти вікна */
     border-radius: 12px;
     background: #000;
-    /* чорний фон під час завантаження */
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-icon {
+    font-size: 2em;
+    line-height: 1;
+}
+
+.color-example-tag {
+    margin-top: 20px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-align: center;
+    color: #555;
+}
+
+.modal-image-red {
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 8px;
 }
 
 @media (min-width: 768px) {
@@ -424,15 +446,14 @@ body {
 }
 
 /* slide5 */
-
 #slide-5 {
-    background-color: #FF6D00;
+    background-color: #B45309;
     justify-content: center;
     padding-top: 20px;
 }
 
 .slide-card5 {
-    background-color: #FFCC80;
+    background-color: #FEF3C7;
     border-radius: 1.5rem;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     width: 90%;
@@ -443,12 +464,12 @@ body {
 .slide-title--journal {
     font-size: 30px;
     font-weight: 800;
-    color: #d6630b;
+    color: #763808;
     overflow-wrap: break-word;
 }
 
 .sendtg-btn {
-    background-color: #d6630b;
+    background-color: #B45309;
     color: white;
     border: none;
     border-radius: 0.375rem;
@@ -472,16 +493,20 @@ body {
     text-align: center;
 }
 
-#feedback-sent {}
+#feedback-sent {
+    color: #FF6D00;
+}
 
-.tgsulka {}
+.tgsulka {
+    color: #FF6D00;
+}
 
 
 .description_tg {
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 30px;
-    color: #FF6D00;
+    color: #381c06;
 }
 
 .textarea {
@@ -532,28 +557,35 @@ body {
     transform: scale(1.2);
 }
 
-/* кнопка закриття */
 .close-btn {
     position: absolute;
-    top: 10px;
-    right: 15px;
-    color: #999;
-    font-size: 30px;
-    font-weight: bold;
+    top: 8px;
+    right: 10px;
+    color: var(--color-modal-close);
+    font-size: 26px;
+    font-weight: 700;
     cursor: pointer;
     line-height: 1;
+    background: transparent;
+    border: none;
+    padding: 6px 8px;
+    border-radius: 6px;
 }
 
 .close-btn:hover,
 .close-btn:focus {
-    color: #333;
+    color: var(--color-modal-close-hover);
+    background: rgba(0, 0, 0, 0.04);
+    outline: none;
 }
 
-/* Додайте це до кінця вашого styles.css */
+.close-btn:focus-visible {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
 /* slide7 - Ігровий слайд */
 #slide-7 {
-    background-color: #A7FFEB;
-    /* Світло-зелений фон для ігрового розділу */
+    background-color: #0B7285;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -569,12 +601,9 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     background-color: #FFFFFF;
-    /* Фон для Canvas */
 }
 
 #dreamCanvas {
-    /* Розмір вже задається в JS, але тут можна додати початкові стилі */
     display: block;
-    background-color: #E0F7FA;
-    /* Дуже світло-блакитний фон неба */
+    background-color: #A7F3D0;
 }

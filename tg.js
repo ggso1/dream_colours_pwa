@@ -1,21 +1,16 @@
 const token = '8527145334:AAGtkDF0Ek6FNjqQW73nn1T_NTIDE5Fzki0';
-// ВИПРАВЛЕНО: Chat ID ГРУПИ ПОВИНЕН БУТИ З МІНУСОМ
 const chatId = '-4997547012';
 
 // DOM елементи
 const feedbackInput = document.getElementById('feedback');
 const sendBtn = document.querySelector('.sendtg-btn');
-const feedbackSent = document.getElementById('feedback-sent'); // Статус надсилання
+const feedbackSent = document.getElementById('feedback-sent'); 
 
-// URL для запиту до API для отримання кількості учасників
+
 const url = `https://api.telegram.org/bot${token}/getChatMembersCount?chat_id=${chatId}`;
 
 
-// ... (Функції checkBotAndChat та getPeopleCount залишаються без змін) ...
-// ... (Обробник window.onload залишається без змін) ...
 
-
-// Обробник для відправки коментаря через Telegram-бота
 sendBtn.addEventListener('click', (event) => {
     event.preventDefault();
 
@@ -29,14 +24,12 @@ sendBtn.addEventListener('click', (event) => {
 
     const sendMessageUrl = `https://api.telegram.org/bot${token}/sendMessage`;
 
-    // ВИПРАВЛЕНО: Прибираємо @. Використовуємо коректний chatId (з мінусом)
     const params = {
         chat_id: chatId,
         text: textToSend,
         parse_mode: 'HTML'
     };
 
-    // Відправка повідомлення через Telegram API
     fetch(sendMessageUrl, {
         method: 'POST',
         headers: {
@@ -47,7 +40,6 @@ sendBtn.addEventListener('click', (event) => {
         .then(response => {
             if (!response.ok) {
                 return response.json().then(err => {
-                    // Логуємо деталі помилки від Telegram
                     console.error("Telegram API Error Details:", err);
                     throw new Error(`Telegram API Error: ${err.description || response.status}`);
                 });
@@ -72,7 +64,7 @@ sendBtn.addEventListener('click', (event) => {
         });
 });
 
-// Очищення повідомлення про статус при кліку на поле вводу
+
 feedbackInput.addEventListener('click', () => {
     feedbackSent.textContent = '';
 });
