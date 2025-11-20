@@ -51,16 +51,31 @@ sendBtn.addEventListener('click', (event) => {
                 feedbackInput.value = '';
                 feedbackSent.textContent = 'Успішно надіслано!';
                 feedbackSent.classList.remove('hidden');
+                
+                // Приховати повідомлення через 3 секунди
+                setTimeout(() => {
+                    feedbackSent.classList.add('hidden');
+                }, 3000);
             } else {
                 console.error("Помилка надсилання:", data);
                 feedbackSent.textContent = 'Не вдалося надіслати.';
                 feedbackSent.classList.remove('hidden');
+                
+                // Приховати повідомлення про помилку через 3 секунди
+                setTimeout(() => {
+                    feedbackSent.classList.add('hidden');
+                }, 3000);
             }
         })
         .catch(error => {
             console.error("Помилка надсилання:", error);
             feedbackSent.textContent = 'Виникла помилка при надсиланні.';
             feedbackSent.classList.remove('hidden');
+            
+            // Приховати повідомлення про помилку через 3 секунди
+            setTimeout(() => {
+                feedbackSent.classList.add('hidden');
+            }, 3000);
         });
 });
 
